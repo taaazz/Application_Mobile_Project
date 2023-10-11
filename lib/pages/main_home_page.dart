@@ -116,6 +116,131 @@ class MainHomepage extends StatelessWidget {
                 ),
               ),
             ),
+            Container(
+              decoration: BoxDecoration(color: Colors.white),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: 18.0, right: 18.0, top: 5.0, bottom: 8),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Category',
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Text(
+                            'See All',
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.brown.shade400,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(top: 20.0, left: 18, right: 18),
+                      child: Row(
+                        children: [
+                          Container(
+                            height: 250,
+                            width: 180,
+                            decoration: BoxDecoration(
+                              color: Colors.grey.shade100,
+                              borderRadius: BorderRadius.circular(12.0),
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(
+                                      12.0), // Border radius untuk gambar
+                                  child: Container(
+                                    height: 150,
+                                    width: 150,
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        image: AssetImage(
+                                            'lib/aset/product/serum1.png'),
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Serum Somethinc Retinol',
+                                        style: TextStyle(
+                                            color: Colors.grey,
+                                            fontWeight: FontWeight.normal),
+                                      ),
+                                      SizedBox(
+                                        height: 2,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            'RP. 100.000',
+                                            style: TextStyle(
+                                                color: Colors.brown,
+                                                fontWeight: FontWeight.w800),
+                                          ),
+                                          Container(
+                                            width: 40, // Lebar container
+                                            height: 40, // Tinggi container
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape
+                                                  .circle, // Menggunakan bentuk lingkaran
+                                              color: Colors.brown.shade700,
+                                              border: Border.all(
+                                                // Warna garis
+                                                width: 0.5, // Lebar garis
+                                              ), // Warna latar belakang lingkaran
+                                            ),
+                                            child: Center(
+                                              child: Icon(
+                                                CupertinoIcons.bag,
+                                                color:
+                                                    Colors.white, // Warna ikon
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       ),
