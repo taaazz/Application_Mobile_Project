@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:project/app/routes/app_pages.dart';
 
 class BottomNavBar extends StatelessWidget {
@@ -24,7 +23,7 @@ class BottomNavBar extends StatelessWidget {
           icon: Container(
             child: IconButton(
               onPressed: () {
-                Get.toNamed(Routes.HOME);
+                Routes.HOME;
                 // Navigator.pushNamed(context, MainHomepage.routeName);
               },
               icon: const Icon(Icons.home_filled),
@@ -41,7 +40,7 @@ class BottomNavBar extends StatelessWidget {
               icon: const Icon(CupertinoIcons.chat_bubble_text_fill),
             ),
           ),
-          label: 'Review',
+          label: '',
         ),
         BottomNavigationBarItem(
           icon: Container(
