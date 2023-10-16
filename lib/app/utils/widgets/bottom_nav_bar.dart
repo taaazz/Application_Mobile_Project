@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:project/app/routes/app_pages.dart';
 
 class BottomNavBar extends StatelessWidget {
   const BottomNavBar({
@@ -22,7 +24,7 @@ class BottomNavBar extends StatelessWidget {
           icon: Container(
             child: IconButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/MainHomepage');
+                Get.toNamed(Routes.HOME);
                 // Navigator.pushNamed(context, MainHomepage.routeName);
               },
               icon: const Icon(Icons.home_filled),
@@ -36,10 +38,10 @@ class BottomNavBar extends StatelessWidget {
               onPressed: () {
                 print('No Wishlist screen yet');
               },
-              icon: const Icon(CupertinoIcons.heart_fill),
+              icon: const Icon(CupertinoIcons.chat_bubble_text_fill),
             ),
           ),
-          label: 'Wishlist',
+          label: 'Review',
         ),
         BottomNavigationBarItem(
           icon: Container(
@@ -47,7 +49,7 @@ class BottomNavBar extends StatelessWidget {
               onPressed: () {
                 print('No Wishlist screen yet');
               },
-              icon: const Icon(Icons.notifications),
+              icon: const Icon(Icons.favorite),
             ),
           ),
           label: 'Notification',

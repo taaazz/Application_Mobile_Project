@@ -1,26 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:project/pages/login_page.dart';
-import 'package:project/pages/main_home_page.dart';
+
+import 'package:get/get.dart';
+import 'package:project/app/modules/splash/bindings/splash_binding.dart';
+
+import 'app/routes/app_pages.dart';
 
 void main() {
-  SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle(statusBarColor: Colors.black));
-  runApp(const MyApp());
+  runApp(
+    MyApp(),
+  );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({
+    super.key,
+  });
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
+      title: "Application",
       debugShowCheckedModeBanner: false,
-      routes: {
-        '/': (context) => LoginPage(),
-        '/MainHomepage': (context) => MainHomepage(),
-      },
+      initialRoute: AppPages.INITIAL,
+      getPages: AppPages.routes,
+      initialBinding: SplashBinding(),
     );
   }
 }

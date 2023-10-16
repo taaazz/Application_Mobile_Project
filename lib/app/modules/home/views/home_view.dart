@@ -1,16 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:project/widgets/bottom_nav_bar.dart';
-import 'package:project/widgets/productCard.dart';
-import 'package:project/widgets/product_image.dart';
 
-class MainHomepage extends StatelessWidget {
-  const MainHomepage({Key? key}) : super(key: key);
+import 'package:get/get.dart';
 
+import '../controllers/home_controller.dart';
+import '../../../utils/widgets/bottom_nav_bar.dart';
+import '../../../utils/widgets/productCard.dart';
+import 'widgets/product_image.dart';
+
+class HomeView extends GetView<HomeController> {
+  const HomeView({Key? key}) : super(key: key);
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(),
-      bottomNavigationBar: const BottomNavBar(index: 0),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -258,6 +260,7 @@ class MainHomepage extends StatelessWidget {
           ),
         ),
       ),
+      bottomNavigationBar: BottomNavBar(index: 0),
     );
   }
 }
