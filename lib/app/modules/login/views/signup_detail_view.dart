@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project/app/modules/login/controllers/login_controller.dart';
-import 'package:project/app/modules/login/views/widgets/login_button_widget.dart';
+import 'package:project/app/utils/widgets/login_button_widget.dart';
 import 'package:project/app/routes/app_pages.dart';
 
 class SignupDetail extends StatefulWidget {

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:project/app/routes/app_pages.dart';
 
 class BottomNavBar extends StatelessWidget {
@@ -9,59 +10,47 @@ class BottomNavBar extends StatelessWidget {
   }) : super(key: key);
 
   final int index;
+
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      backgroundColor: Colors.white,
-      currentIndex: index,
-      showSelectedLabels: false,
-      showUnselectedLabels: false,
+      type: BottomNavigationBarType.fixed,
       selectedItemColor: Colors.brown,
-      unselectedItemColor: Colors.grey.withAlpha(100),
+      unselectedItemColor: Colors.grey,
+      backgroundColor: Colors.white,
+      elevation: 0,
+      currentIndex: index,
+      onTap: (int index) {
+        if (index == 0) {
+          Get.toNamed(Routes.HOME);
+        } else if (index == 1) {
+          Get.toNamed(Routes.IMAGE_PICKER);
+        } else if (index == 2) {
+          Get.toNamed(Routes.TREND);
+        } else if (index == 3) {
+          print('No Profile screen yet');
+        }
+      },
       items: [
         BottomNavigationBarItem(
-          icon: Container(
-            child: IconButton(
-              onPressed: () {
-                Routes.HOME;
-                // Navigator.pushNamed(context, MainHomepage.routeName);
-              },
-              icon: const Icon(Icons.home_filled),
-            ),
-          ),
+          icon: const Icon(Icons.home_filled),
+          activeIcon: const Icon(Icons.home_filled),
           label: 'Home',
         ),
         BottomNavigationBarItem(
-          icon: Container(
-            child: IconButton(
-              onPressed: () {
-                print('No Wishlist screen yet');
-              },
-              icon: const Icon(CupertinoIcons.chat_bubble_text_fill),
-            ),
-          ),
-          label: '',
+          icon: const Icon(CupertinoIcons.chat_bubble_text_fill),
+          activeIcon: const Icon(CupertinoIcons.chat_bubble_text_fill,
+              color: Colors.brown),
+          label: 'Review',
         ),
         BottomNavigationBarItem(
-          icon: Container(
-            child: IconButton(
-              onPressed: () {
-                print('No Wishlist screen yet');
-              },
-              icon: const Icon(Icons.favorite),
-            ),
-          ),
-          label: 'Notification',
+          icon: const Icon(Icons.favorite),
+          activeIcon: const Icon(Icons.favorite, color: Colors.brown),
+          label: 'Trend',
         ),
         BottomNavigationBarItem(
-          icon: Container(
-            child: IconButton(
-              onPressed: () {
-                print('No Wishlist screen yet');
-              },
-              icon: const Icon(Icons.person),
-            ),
-          ),
+          icon: const Icon(Icons.person),
+          activeIcon: const Icon(Icons.person, color: Colors.brown),
           label: 'Profile',
         ),
       ],

@@ -8,6 +8,10 @@ abstract class Routes {
   static const LOGIN = _Paths.LOGIN;
   static const LOGINDETAIL = _Paths.LOGINDETAIL;
   static const SIGNUPDETAIL = _Paths.SIGNUPDETAIL;
+  static const IMAGE_PICKER = _Paths.IMAGE_PICKER;
+  static const PROFILE = _Paths.PROFILE;
+  static const TREND = _Paths.TREND;
+  static const PRODUCT = _Paths.PRODUCT;
 }
 
 abstract class _Paths {
@@ -17,4 +21,8 @@ abstract class _Paths {
   static const LOGIN = '/login';
   static const LOGINDETAIL = '/login_detail';
   static const SIGNUPDETAIL = '/signup_detail';
+  static const IMAGE_PICKER = '/image-picker';
+  static const PROFILE = '/profile';
+  static const TREND = '/trend';
+  static const PRODUCT = '/product';
 }

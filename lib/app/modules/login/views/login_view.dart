@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:project/app/routes/app_pages.dart';
 
 import '../controllers/login_controller.dart';
-import 'widgets/login_button_widget.dart';
+import '../../../utils/widgets/login_button_widget.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({Key? key}) : super(key: key);
