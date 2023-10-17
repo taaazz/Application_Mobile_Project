@@ -33,22 +33,68 @@ class _ProductReviewScreenState extends State<ProductReviewScreen> {
     final picker = ImagePicker();
     XFile? pickedFile;
 
-    try {
-      pickedFile = await picker.pickImage(source: ImageSource.gallery);
-    } catch (e) {
-      print('Error picking image: $e');
-      return;
-    }
-
-    if (pickedFile != null) {
-      // Prompt user for review details
-      final review = await _getReviewDetails(pickedFile.path);
-      if (review != null) {
-        setState(() {
-          _productReviews.add(review);
-        });
-      }
-    }
+    // Tampilkan dialog untuk memilih sumber gambar (kamera atau galeri)
+    await showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Choose Image Source'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                GestureDetector(
+                  child: Text('Camera'),
+                  onTap: () async {
+                    Navigator.pop(context);
+                    try {
+                      pickedFile =
+                          await picker.pickImage(source: ImageSource.camera);
+                      if (pickedFile == null) {
+                        // User tidak memilih gambar
+                        return;
+                      }
+                      // Prompt user for review details
+                      final review = await _getReviewDetails(pickedFile!.path);
+                      if (review != null) {
+                        setState(() {
+                          _productReviews.add(review);
+                        });
+                      }
+                    } catch (e) {
+                      print('Error picking image from camera: $e');
+                    }
+                  },
+                ),
+                Padding(padding: EdgeInsets.all(8.0)),
+                GestureDetector(
+                  child: Text('Gallery'),
+                  onTap: () async {
+                    Navigator.pop(context);
+                    try {
+                      pickedFile =
+                          await picker.pickImage(source: ImageSource.gallery);
+                      if (pickedFile == null) {
+                        // User tidak memilih gambar
+                        return;
+                      }
+                      // Prompt user for review details
+                      final review = await _getReviewDetails(pickedFile!.path);
+                      if (review != null) {
+                        setState(() {
+                          _productReviews.add(review);
+                        });
+                      }
+                    } catch (e) {
+                      print('Error picking image from gallery: $e');
+                    }
+                  },
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
   }
 
   Future<ProductReview?> _getReviewDetails(String imagePath) async {
@@ -147,17 +193,30 @@ class _ProductReviewScreenState extends State<ProductReviewScreen> {
           return ListTile(
             leading: Image.file(
               File(_productReviews[index].imageUrl),
-              width: 50,
-              height: 50,
+              width: 70,
+              height: 70,
             ),
-            title: Text(_productReviews[index].name),
+            title: Text(
+              _productReviews[index].name,
+              style: TextStyle(
+                fontWeight: FontWeight.bold, // Memberikan tebal pada teks
+                fontSize: 20.0, // Mengatur ukuran teks
+                color: Colors.black, // Mengatur warna teks
+              ),
+            ),
             subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Name: ${_productReviews[index].name}'),
-                Text('Price: \$${_productReviews[index].price}'),
-                Text('Rating: ${_productReviews[index].rating}'),
-                Text('Description: ${_productReviews[index].description}'),
+                Text(
+                  'Rp ${_productReviews[index].price.toStringAsFixed(0)}',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      color: Colors.brown),
+                ),
+                Text(
+                    '${_productReviews[index].rating.toStringAsFixed(1)} / 5.0'),
+                Text('${_productReviews[index].description}'),
               ],
             ),
           );
@@ -167,6 +226,7 @@ class _ProductReviewScreenState extends State<ProductReviewScreen> {
         onPressed: _addReview,
         tooltip: 'Add Review',
         child: Icon(Icons.add),
+        backgroundColor: Colors.brown,
       ),
       bottomNavigationBar: BottomNavBar(index: 1),
     );
