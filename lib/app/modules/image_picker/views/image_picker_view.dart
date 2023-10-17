@@ -103,8 +103,8 @@ class _ProductReviewScreenState extends State<ProductReviewScreen> {
       builder: (context) {
         String name = '';
         String description = '';
-        double price = 0.0;
-        double rating = 0.0;
+        double price = 0;
+        double rating = 0;
 
         return AlertDialog(
           title: Text('Add Review'),
@@ -190,32 +190,71 @@ class _ProductReviewScreenState extends State<ProductReviewScreen> {
       body: ListView.builder(
         itemCount: _productReviews.length,
         itemBuilder: (context, index) {
-          return ListTile(
-            leading: Image.file(
-              File(_productReviews[index].imageUrl),
-              width: 70,
-              height: 70,
-            ),
-            title: Text(
-              _productReviews[index].name,
-              style: TextStyle(
-                fontWeight: FontWeight.bold, // Memberikan tebal pada teks
-                fontSize: 20.0, // Mengatur ukuran teks
-                color: Colors.black, // Mengatur warna teks
+          int fullStars = _productReviews[index].rating.floor();
+          double remainingStars = _productReviews[index].rating - fullStars;
+          List<Widget> starIcons = List.generate(fullStars, (index) {
+            return Icon(
+              Icons.star,
+              color: Color.fromARGB(255, 255, 230, 0),
+            );
+          });
+
+          // Add a half star if remainingStars > 0
+          if (remainingStars > 0) {
+            starIcons.add(
+              Icon(
+                Icons.star_half,
+                color: Color.fromARGB(255, 255, 230, 0),
+              ),
+            );
+          }
+
+          return Container(
+            padding: EdgeInsets.all(10.0),
+            margin: EdgeInsets.all(10.0),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10.0),
+              border: Border.all(
+                color: Colors.grey.shade300,
+                width: 1.0,
               ),
             ),
-            subtitle: Column(
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Stack(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Image.file(
+                        File(_productReviews[index].imageUrl),
+                        width: double.infinity,
+                        height: 200.0,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 10.0),
+                Text(
+                  _productReviews[index].name,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0,
+                  ),
+                ),
                 Text(
                   'Rp ${_productReviews[index].price.toStringAsFixed(0)}',
                   style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                      color: Colors.brown),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                    color: Colors.brown,
+                  ),
                 ),
-                Text(
-                    '${_productReviews[index].rating.toStringAsFixed(1)} / 5.0'),
+                Row(
+                  children: starIcons,
+                ),
                 Text('${_productReviews[index].description}'),
               ],
             ),
