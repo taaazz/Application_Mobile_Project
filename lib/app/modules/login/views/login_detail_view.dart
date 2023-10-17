@@ -22,7 +22,15 @@ class _LoginDetailState extends State<LoginDetail> {
 
     return GetBuilder<LoginController>(builder: (controller) {
       return Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
+          title: Text(
+            'Log In',
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 20,
+            ),
+          ),
           leading: IconButton(
             icon: const Icon(
               Icons.chevron_left,
@@ -39,15 +47,13 @@ class _LoginDetailState extends State<LoginDetail> {
           height: height,
           width: width,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              const Text(
-                "Log In",
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 32,
-                  fontWeight: FontWeight.w700,
-                ),
+              SizedBox(height: height * 0.05),
+              Image(
+                image: AssetImage('lib/aset/images/Luskins.png'),
+                width: 200.0,
+                height: 100.0,
               ),
               SizedBox(height: height * 0.05),
               Container(

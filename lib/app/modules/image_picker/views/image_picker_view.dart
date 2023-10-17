@@ -170,10 +170,14 @@ class _ProductReviewScreenState extends State<ProductReviewScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(
           'Product Reviews',
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 20,
+          ),
         ),
         leading: IconButton(
           icon: const Icon(
@@ -195,7 +199,7 @@ class _ProductReviewScreenState extends State<ProductReviewScreen> {
           List<Widget> starIcons = List.generate(fullStars, (index) {
             return Icon(
               Icons.star,
-              color: Color.fromARGB(255, 255, 230, 0),
+              color: Color.fromARGB(255, 255, 230, 3),
             );
           });
 

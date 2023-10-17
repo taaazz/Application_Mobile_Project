@@ -21,7 +21,15 @@ class _SignupDetailState extends State<SignupDetail> {
 
     return GetBuilder<LoginController>(builder: (controller) {
       return Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
+          title: Text(
+            'Sign Up',
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 20,
+            ),
+          ),
           leading: IconButton(
             icon: const Icon(
               Icons.chevron_left,
@@ -41,14 +49,11 @@ class _SignupDetailState extends State<SignupDetail> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(height: height * .05),
-                Text(
-                  "Sign Up",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 32,
-                    fontWeight: FontWeight.w700,
-                  ),
+                SizedBox(height: height * 0.05),
+                Image(
+                  image: AssetImage('lib/aset/images/Luskins.png'),
+                  width: 200.0,
+                  height: 100.0,
                 ),
                 SizedBox(height: height * .05),
                 Container(

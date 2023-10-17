@@ -14,6 +14,8 @@ import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
+import '../modules/trend/bindings/trend_binding.dart';
+import '../modules/trend/views/trend_view.dart';
 
 part 'app_routes.dart';
 
@@ -62,6 +64,11 @@ class AppPages {
       name: _Paths.PRODUCT,
       page: () => const ProductView(),
       binding: ProductBinding(),
+    ),
+    GetPage(
+      name: _Paths.TREND,
+      page: () => const TrendView(),
+      binding: TrendBinding(),
     ),
   ];
 }

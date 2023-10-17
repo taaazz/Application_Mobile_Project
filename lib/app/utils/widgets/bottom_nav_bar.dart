@@ -28,7 +28,7 @@ class BottomNavBar extends StatelessWidget {
         } else if (index == 2) {
           Get.toNamed(Routes.TREND);
         } else if (index == 3) {
-          print('No Profile screen yet');
+          Get.toNamed(Routes.PROFILE);
         }
       },
       items: [
