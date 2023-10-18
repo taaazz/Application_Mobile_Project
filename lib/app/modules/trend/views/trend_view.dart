@@ -56,11 +56,12 @@ class _CategoryNews extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding: EdgeInsets.all(5.0),
+          padding: EdgeInsets.all(8.0),
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
               children: [
+                SizedBox(height: 5),
                 ProductCard(
                   imageAsset: 'lib/aset/product/or1.jpg',
                   productName: 'The Ordinary Moisturizer',
@@ -80,6 +81,7 @@ class _CategoryNews extends StatelessWidget {
             ),
           ),
         ),
+        SizedBox(height: 8),
         TabBar(
           isScrollable: true,
           indicatorColor: Colors.brown,
@@ -90,6 +92,7 @@ class _CategoryNews extends StatelessWidget {
                     tab,
                     style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                           fontWeight: FontWeight.bold,
+                          fontSize: 20,
                         ),
                   ),
                 ),
@@ -208,7 +211,7 @@ class _DiscoverNews extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.25,
+      height: MediaQuery.of(context).size.height * 0.2,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
