@@ -11,7 +11,6 @@ abstract class Routes {
   static const IMAGE_PICKER = _Paths.IMAGE_PICKER;
   static const PROFILE = _Paths.PROFILE;
   static const TREND = _Paths.TREND;
-  static const PRODUCT = _Paths.PRODUCT;
   static const LATIHAN = _Paths.LATIHAN;
 }
 
@@ -25,6 +24,5 @@ abstract class _Paths {
   static const IMAGE_PICKER = '/image-picker';
   static const PROFILE = '/profile';
   static const TREND = '/trend';
-  static const PRODUCT = '/product';
   static const LATIHAN = '/latihan';
 }
