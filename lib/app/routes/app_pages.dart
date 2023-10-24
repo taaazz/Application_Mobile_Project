@@ -4,6 +4,8 @@ import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/image_picker/bindings/image_picker_binding.dart';
 import '../modules/image_picker/views/image_picker_view.dart';
+import '../modules/latihan/bindings/latihan_binding.dart';
+import '../modules/latihan/views/latihan_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_detail_view.dart';
 import '../modules/login/views/login_view.dart';
@@ -69,6 +71,11 @@ class AppPages {
       name: _Paths.TREND,
       page: () => const TrendView(),
       binding: TrendBinding(),
+    ),
+    GetPage(
+      name: _Paths.LATIHAN,
+      page: () => const LatihanView(),
+      binding: LatihanBinding(),
     ),
   ];
 }

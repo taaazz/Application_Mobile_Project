@@ -33,7 +33,7 @@ class Article extends Equatable {
       id: '2',
       title: 'Niacinamide Anti Jerawat Cuy!',
       body: 'Nullam sed augue a turpis bibendum cursus...',
-      category: 'Skincare',
+      category: 'Bodycare',
       imageUrl: 'lib/aset/product/2.webp',
       views: 1204,
       author: 'Tazkia Damayanti',
