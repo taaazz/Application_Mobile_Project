@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:project/app/modules/home/views/webview_page.dart';
 
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
@@ -76,6 +77,12 @@ class AppPages {
       name: _Paths.PRODUCT,
       page: () => ProductView(),
       binding: ProductBinding(),
+    ),
+
+    GetPage(
+      name: _Paths.WEBVIEW_PAGE,
+      page: () => WebviewPage(),
+      binding: HomeBinding(),
     ),
   ];
 }

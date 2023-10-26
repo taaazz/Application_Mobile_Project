@@ -70,20 +70,32 @@ class HomeView extends GetView<HomeController> {
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     children: [
-                      Container(
-                        width: 400, // Lebar container sesuaikan dengan gambar
-                        height: 200, // Tinggi container sesuaikan dengan gambar
-                        child: Image.asset(
-                          'lib/aset/images/Banner.png',
-                          fit: BoxFit.cover,
+                      InkWell(
+                        onTap: () {
+                          Get.toNamed(Routes.WEBVIEW_PAGE);
+                        },
+                        child: Container(
+                          width: 400, // Lebar container sesuaikan dengan gambar
+                          height:
+                              200, // Tinggi container sesuaikan dengan gambar
+                          child: Image.asset(
+                            'lib/aset/images/Banner.png',
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
-                      Container(
-                        width: 400, // Lebar container sesuaikan dengan gambar
-                        height: 200, // Tinggi container sesuaikan dengan gambar
-                        child: Image.asset(
-                          'lib/aset/images/Banner-2.png',
-                          fit: BoxFit.cover,
+                      InkWell(
+                        onTap: () {
+                          Get.toNamed(Routes.WEBVIEW_PAGE);
+                        },
+                        child: Container(
+                          width: 400, // Lebar container sesuaikan dengan gambar
+                          height:
+                              200, // Tinggi container sesuaikan dengan gambar
+                          child: Image.asset(
+                            'lib/aset/images/Banner-2.png',
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                     ],
