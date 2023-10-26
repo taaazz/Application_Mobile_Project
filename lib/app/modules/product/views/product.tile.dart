@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../Models/Product.dart';
+import 'package:project/app/Models/Product.dart';
 
 class ProductTile extends StatelessWidget {
   final Product product;
@@ -36,7 +35,7 @@ class ProductTile extends StatelessWidget {
                         backgroundColor: Colors.white,
                         child: IconButton(
                           icon: product.isFavorite.value
-                              ? Icon(Icons.favorite_rounded)
+                              ? const Icon(Icons.favorite_rounded)
                               : Icon(Icons.favorite_border),
                           onPressed: () {
                             product.isFavorite.toggle();
