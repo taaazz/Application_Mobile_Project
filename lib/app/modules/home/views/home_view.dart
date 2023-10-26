@@ -14,57 +14,60 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(60.0),
+        child: Container(
+          padding: EdgeInsets.only(top: 25, right: 16, left: 16),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    child: ClipRRect(
+                      child: Image.asset(
+                        'lib/aset/images/Luskins.png',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    width: 100,
+                    height: 20,
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: Center(
+                      child: IconButton(
+                        icon: Icon(
+                          CupertinoIcons.cart,
+                          color:
+                              Colors.black, // Suggested change for visibility
+                        ),
+                        onPressed: () {},
+                      ),
+                    ),
+                  ),
+                  Container(
+                    child: Center(
+                      child: Icon(
+                        CupertinoIcons.bell,
+                        color: Colors.black, // Warna ikon
+                      ),
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
+        ),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Container(
-                padding: EdgeInsets.all(10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        Container(
-                          child: ClipRRect(
-                            child: Image.asset(
-                              'lib/aset/images/Luskins.png', // Fixed image asset path
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          width: 100,
-                          height: 20,
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(right: 8.0),
-                          child: Center(
-                            child: IconButton(
-                              icon: Icon(
-                                CupertinoIcons.cart,
-                                color: Colors
-                                    .black, // Suggested change for visibility
-                              ),
-                              onPressed: () {},
-                            ),
-                          ),
-                        ),
-                        Container(
-                          child: Center(
-                            child: Icon(
-                              CupertinoIcons.bell,
-                              color: Colors.black, // Warna ikon
-                            ),
-                          ),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-              ),
               Container(
                 child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
@@ -131,7 +134,7 @@ class HomeView extends GetView<HomeController> {
                             child: Text(
                               'See All',
                               style: TextStyle(
-                                color: Colors.brown,
+                                color: Colors.black,
                                 decoration: TextDecoration.underline,
                               ),
                             ),
@@ -195,7 +198,7 @@ class HomeView extends GetView<HomeController> {
                             child: Text(
                               'See All',
                               style: TextStyle(
-                                color: Colors.brown,
+                                color: Colors.black,
                                 decoration: TextDecoration.underline,
                               ),
                             ),
