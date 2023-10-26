@@ -11,6 +11,7 @@ class ProductView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(
@@ -24,23 +25,26 @@ class ProductView extends StatelessWidget {
         backgroundColor: Colors.white,
         elevation: 0,
         actions: [
-          Row(
-            children: [
-              IconButton(
-                icon: Icon(
-                  CupertinoIcons.cart,
-                  color: Colors.black, // Suggested change for visibility
+          Padding(
+            padding: const EdgeInsets.only(right: 10.0),
+            child: Row(
+              children: [
+                IconButton(
+                  icon: Icon(
+                    CupertinoIcons.cart,
+                    color: Colors.black, // Suggested change for visibility
+                  ),
+                  onPressed: () {},
                 ),
-                onPressed: () {},
-              ),
-              IconButton(
-                icon: Icon(
-                  CupertinoIcons.bell,
-                  color: Colors.black, // Suggested change for visibility
+                IconButton(
+                  icon: Icon(
+                    CupertinoIcons.bell,
+                    color: Colors.black, // Suggested change for visibility
+                  ),
+                  onPressed: () {},
                 ),
-                onPressed: () {},
-              ),
-            ],
+              ],
+            ),
           ),
         ],
       ),

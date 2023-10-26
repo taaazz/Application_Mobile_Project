@@ -19,7 +19,7 @@ class ProductCard extends StatelessWidget {
         height: 250,
         width: 180,
         decoration: BoxDecoration(
-          color: Colors.grey.shade100,
+          color: Colors.white,
           borderRadius: BorderRadius.circular(12.0),
         ),
         child: Column(
@@ -60,7 +60,7 @@ class ProductCard extends StatelessWidget {
                       Text(
                         productPrice,
                         style: TextStyle(
-                          color: Colors.brown,
+                          color: Colors.black,
                           fontWeight: FontWeight.w800,
                         ),
                       ),
@@ -69,7 +69,7 @@ class ProductCard extends StatelessWidget {
                         height: 40,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Colors.brown.shade700,
+                          color: Colors.black,
                           border: Border.all(
                             width: 0.5,
                           ),
