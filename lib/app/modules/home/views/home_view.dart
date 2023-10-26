@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:project/app/routes/app_pages.dart';
 
 import '../controllers/home_controller.dart';
 import '../../../utils/widgets/bottom_nav_bar.dart';
@@ -40,39 +41,18 @@ class HomeView extends GetView<HomeController> {
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(right: 8.0),
-                          child: Container(
-                            width: 40, // Lebar container
-                            height: 40, // Tinggi container
-                            decoration: BoxDecoration(
-                              shape: BoxShape
-                                  .circle, // Menggunakan bentuk lingkaran
-                              color: Colors.white,
-                              border: Border.all(
-                                color: Colors.grey, // Warna garis
-                                width: 0.5, // Lebar garis
+                          child: Center(
+                            child: IconButton(
+                              icon: Icon(
+                                CupertinoIcons.cart,
+                                color: Colors
+                                    .black, // Suggested change for visibility
                               ),
-                              // Warna latar belakang lingkaran
-                            ),
-                            child: Center(
-                              child: Icon(
-                                CupertinoIcons.search,
-                                color: Colors.black, // Warna ikon
-                              ),
+                              onPressed: () {},
                             ),
                           ),
                         ),
                         Container(
-                          width: 40, // Lebar container
-                          height: 40, // Tinggi container
-                          decoration: BoxDecoration(
-                            shape:
-                                BoxShape.circle, // Menggunakan bentuk lingkaran
-                            color: Colors.white,
-                            border: Border.all(
-                              color: Colors.grey, // Warna garis
-                              width: 0.5, // Lebar garis
-                            ), // Warna latar belakang lingkaran
-                          ),
                           child: Center(
                             child: Icon(
                               CupertinoIcons.bell,
@@ -146,8 +126,7 @@ class HomeView extends GetView<HomeController> {
                           ),
                           InkWell(
                             onTap: () {
-                              // Handle sign up tap
-                              print('See All tapped');
+                              Get.toNamed(Routes.PRODUCT);
                             },
                             child: Text(
                               'See All',
@@ -211,8 +190,7 @@ class HomeView extends GetView<HomeController> {
                           ),
                           InkWell(
                             onTap: () {
-                              // Handle sign up tap
-                              print('See tapped');
+                              Get.toNamed(Routes.PRODUCT);
                             },
                             child: Text(
                               'See All',

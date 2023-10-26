@@ -28,7 +28,7 @@ class BottomNavBar extends StatelessWidget {
         } else if (index == 2) {
           Get.toNamed(Routes.TREND);
         } else if (index == 3) {
-          Get.toNamed(Routes.LATIHAN);
+          Get.toNamed(Routes.PROFILE);
         }
       },
       items: [

@@ -1,35 +1,30 @@
-import 'dart:convert';
+// import 'package:get/get.dart';
 
-import 'package:http/http.dart' as http;
+// class LatihanController extends GetxController {
+//   //TODO: Implement LatihanController
 
-import 'package:get/get.dart';
-import 'package:project/app/Models/todo.dart';
+//   @override
+//   void onInit() {
+//     super.onInit();
+//   }
 
-class LatihanController extends GetxController {
-  //TODO: Implement LatihanController
+//   @override
+//   void onReady() {
+//     super.onReady();
+//   }
 
-  @override
-  void onInit() {
-    super.onInit();
-  }
+//   @override
+//   void onClose() {
+//     super.onClose();
+//   }
+// }
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  Future<Todos> fetchTodos() async {
-    final response = await http
-        .get(Uri.parse('https://jsonplaceholder.typicode.com/todos/5'));
-    if (response.statusCode == 200) {
-      return Todos.fromJson(json.decode(response.body));
-    } else {
-      throw Exception('Failed to load album');
-    }
-  }
-}
+// Future<Todos> fetchTodos() async {
+//     final response = await http
+//         .get(Uri.parse('https://jsonplaceholder.typicode.com/todos/5'));
+//     if (response.statusCode == 200) {
+//       return Todos.fromJson(json.decode(response.body));
+//     } else {
+//       throw Exception('Failed to load album');
+//     }
+//   }
