@@ -26,22 +26,25 @@ class _WebviewPageState extends State<WebviewPage> {
           onPageFinished: (String url) {},
           onWebResourceError: (WebResourceError error) {},
           onNavigationRequest: (NavigationRequest request) {
-            if (request.url.startsWith('https://www.youtube.com/')) {
+            if (request.url.startsWith('https://flutter.dev')) {
               return NavigationDecision.prevent;
             }
             return NavigationDecision.navigate;
           },
         ),
-      );
+      )
+      ..loadRequest(Uri.parse('https://sociolla.com/'));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text("hai"),
-          actions: const [],
-        ),
-        body: WebViewWidget(controller: _controller!));
+      appBar: AppBar(
+        title: const Text(""),
+        backgroundColor: Colors.pink,
+        actions: const [],
+      ),
+      body: WebViewWidget(controller: _controller!),
+    );
   }
 }
