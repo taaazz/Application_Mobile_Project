@@ -7,7 +7,6 @@ environment:
 
 dependencies:
   firebase_core: ^2.15.1
-
   cupertino_icons: ^1.0.2
   image_picker: ^0.8.4+2
   image: ^3.0.1
