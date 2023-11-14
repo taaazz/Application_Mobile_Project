@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project/app/modules/login/controllers/login_controller.dart';
-import 'package:project/app/utils/widgets/login_button_widget.dart';
 import 'package:project/app/routes/app_pages.dart';
 
 import '../controllers/auth_controller.dart';
@@ -197,15 +196,47 @@ class _LoginDetailState extends State<LoginDetail> {
                 );
               }),
               SizedBox(height: height * 0.02),
-              GestureDetector(
-                child: CustomButton(
-                  width: width * 0.9,
-                  text: "Create Account",
-                  btnColor: Colors.black,
-                  btnTextColor: Colors.white,
-                  route: Routes.SIGNUPDETAIL, // Isi dengan rute yang diinginkan
+              Container(
+                width: double.infinity,
+                height: 50,
+                margin: EdgeInsets.symmetric(horizontal: 20, vertical: 19),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(primary: Colors.white),
+                  onPressed: () {},
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.network(
+                          "https://www.google.com/url?sa=i&url=https%3A%2F%2Fid.m.wikipedia.org%2Fwiki%2FBerkas%3AGoogle_%2522G%2522_Logo.svg&psig=AOvVaw1sHp-X3jjvNiqS9OJpIg3C&ust=1700066022925000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCLCj_8z1w4IDFQAAAAAdAAAAABAE"),
+                      SizedBox(
+                        width: 12,
+                      ),
+                      Text(
+                        "Sign In with Google",
+                      ),
+                    ],
+                  ),
                 ),
               ),
+              Row(
+                children: [
+                  Text(
+                    "You don't have an account yet? ",
+                  ),
+                  Text(
+                    "Sign Up",
+                  ),
+                ],
+              )
+              // GestureDetector(
+              //   child: CustomButton(
+              //     width: width * 0.9,
+              //     text: "Create Account",
+              //     btnColor: Colors.black,
+              //     btnTextColor: Colors.white,
+              //     route: Routes.SIGNUPDETAIL, // Isi dengan rute yang diinginkan
+              //   ),
+              // ),
             ],
           ),
         ),
