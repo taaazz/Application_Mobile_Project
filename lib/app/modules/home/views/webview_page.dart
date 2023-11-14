@@ -25,12 +25,6 @@ class _WebviewPageState extends State<WebviewPage> {
           onPageStarted: (String url) {},
           onPageFinished: (String url) {},
           onWebResourceError: (WebResourceError error) {},
-          onNavigationRequest: (NavigationRequest request) {
-            if (request.url.startsWith('https://flutter.dev')) {
-              return NavigationDecision.prevent;
-            }
-            return NavigationDecision.navigate;
-          },
         ),
       )
       ..loadRequest(Uri.parse('https://sociolla.com/'));
