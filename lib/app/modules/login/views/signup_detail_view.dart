@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project/app/modules/login/controllers/login_controller.dart';
-import 'package:project/app/utils/widgets/login_button_widget.dart';
-import 'package:project/app/routes/app_pages.dart';
+import '../controllers/auth_controller.dart';
 
 class SignupDetail extends StatefulWidget {
   const SignupDetail({Key? key}) : super(key: key);
@@ -13,6 +12,16 @@ class SignupDetail extends StatefulWidget {
 
 class _SignupDetailState extends State<SignupDetail> {
   bool isObsecure = true;
+  final AuthController _authController = Get.put(AuthController());
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,33 +65,16 @@ class _SignupDetailState extends State<SignupDetail> {
                   height: 100.0,
                 ),
                 SizedBox(height: height * .05),
-                Container(
-                  width: width * .9,
-                  decoration: BoxDecoration(
-                      color: Color.fromARGB(44, 187, 185, 185),
-                      borderRadius: BorderRadius.circular(10)),
-                  child: const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-                    child: TextField(
-                      style: TextStyle(color: Colors.black, fontSize: 18),
-                      decoration: InputDecoration(
-                        enabledBorder: InputBorder.none,
-                        focusedBorder: InputBorder.none,
-                        hintText: "Name",
-                        hintStyle: TextStyle(color: Colors.grey, fontSize: 16),
-                      ),
-                    ),
-                  ),
-                ),
                 SizedBox(height: height * .02),
                 Container(
                   width: width * .9,
                   decoration: BoxDecoration(
                       color: const Color.fromARGB(44, 187, 185, 185),
                       borderRadius: BorderRadius.circular(10)),
-                  child: const Padding(
+                  child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                     child: TextField(
+                      controller: _emailController,
                       style: TextStyle(color: Colors.black, fontSize: 18),
                       decoration: InputDecoration(
                         enabledBorder: InputBorder.none,
@@ -97,13 +89,16 @@ class _SignupDetailState extends State<SignupDetail> {
                 Container(
                   width: width * .9,
                   decoration: BoxDecoration(
-                      color: const Color.fromARGB(44, 187, 185, 185),
-                      borderRadius: BorderRadius.circular(10)),
+                    color: const Color.fromARGB(44, 187, 185, 185),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
                   child: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-                    child: TextField(
-                      obscureText: isObsecure,
+                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                    child: TextFormField(
+                      // Ganti dengan TextFormField
+                      controller: _passwordController,
+                      obscureText:
+                          isObsecure, // Gunakan nilai isObsecure di sini
                       style: const TextStyle(color: Colors.black, fontSize: 18),
                       decoration: InputDecoration(
                         enabledBorder: InputBorder.none,
@@ -129,13 +124,33 @@ class _SignupDetailState extends State<SignupDetail> {
                   ),
                 ),
                 SizedBox(height: height * .02),
-                CustomButton(
-                  width: width * .9,
-                  text: "Create Account",
-                  btnColor: Colors.black,
-                  btnTextColor: Colors.white,
-                  route: Routes.HOME,
-                ),
+                Obx(() {
+                  return ElevatedButton(
+                    onPressed: _authController.isLoading.value
+                        ? null
+                        : () {
+                            _authController.registerUser(
+                              _emailController.text,
+                              _passwordController.text,
+                            );
+                          },
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.black, // Warna coklat
+                    ).copyWith(
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
+                      ),
+                      minimumSize: MaterialStateProperty.all(
+                        Size(width * 0.7, 50),
+                      ),
+                    ),
+                    child: _authController.isLoading.value
+                        ? CircularProgressIndicator()
+                        : Text('Register'),
+                  );
+                }),
               ],
             ),
           ),

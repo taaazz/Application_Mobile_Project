@@ -4,6 +4,8 @@ import 'package:project/app/modules/login/controllers/login_controller.dart';
 import 'package:project/app/utils/widgets/login_button_widget.dart';
 import 'package:project/app/routes/app_pages.dart';
 
+import '../controllers/auth_controller.dart';
+
 class LoginDetail extends StatefulWidget {
   const LoginDetail({Key? key}) : super(key: key);
 
@@ -12,8 +14,18 @@ class LoginDetail extends StatefulWidget {
 }
 
 class _LoginDetailState extends State<LoginDetail> {
-  bool isObscure = true;
+  bool isObsecure = true;
   bool? checked = false;
+  final AuthController _authController = Get.put(AuthController());
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,6 +78,7 @@ class _LoginDetailState extends State<LoginDetail> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                   child: TextField(
+                    controller: _emailController,
                     style: const TextStyle(color: Colors.black, fontSize: 18),
                     decoration: const InputDecoration(
                       enabledBorder: InputBorder.none,
@@ -87,7 +100,8 @@ class _LoginDetailState extends State<LoginDetail> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
                   child: TextField(
-                    obscureText: isObscure,
+                    controller: _passwordController,
+                    obscureText: isObsecure, // Gunakan nilai isObsecure di sini
                     style: const TextStyle(color: Colors.black, fontSize: 18),
                     decoration: InputDecoration(
                       enabledBorder: InputBorder.none,
@@ -100,11 +114,11 @@ class _LoginDetailState extends State<LoginDetail> {
                       suffixIcon: IconButton(
                         onPressed: () {
                           setState(() {
-                            isObscure = !isObscure;
+                            isObsecure = !isObsecure;
                           });
                         },
                         icon: Icon(
-                          isObscure ? Icons.visibility_off : Icons.visibility,
+                          isObsecure ? Icons.visibility_off : Icons.visibility,
                           color: Colors.grey.shade700,
                         ),
                       ),
@@ -145,13 +159,43 @@ class _LoginDetailState extends State<LoginDetail> {
                 ),
               ),
               SizedBox(height: height * 0.01),
-              CustomButton(
-                width: width * 0.9,
-                text: "Sign In",
-                btnColor: Colors.brown,
-                btnTextColor: Colors.white,
-                route: Routes.HOME, // Isi dengan rute yang diinginkan
-              ),
+              Obx(() {
+                return ElevatedButton(
+                  onPressed: _authController.isLoading.value
+                      ? null
+                      : () async {
+                          await _authController.loginUser(
+                            _emailController.text,
+                            _passwordController.text,
+                          );
+
+                          // Setelah login berhasil, navigasi ke halaman beranda
+                          if (!_authController.isLoading.value) {
+                            Get.toNamed(Routes.HOME);
+                          }
+                        },
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.brown, // Warna coklat
+                  ).copyWith(
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                      ),
+                    ),
+                    minimumSize: MaterialStateProperty.all(
+                      Size(width * 0.7, 50),
+                    ),
+                  ),
+                  child: _authController.isLoading.value
+                      ? CircularProgressIndicator()
+                      : Text(
+                          'Login',
+                          style: TextStyle(
+                            color: Colors.white, // Warna teks putih
+                          ),
+                        ),
+                );
+              }),
               SizedBox(height: height * 0.02),
               GestureDetector(
                 child: CustomButton(
