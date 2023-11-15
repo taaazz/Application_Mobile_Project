@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project/app/modules/login/controllers/login_controller.dart';
+import '../../../routes/app_pages.dart';
 import '../controllers/auth_controller.dart';
 
 class SignupDetail extends StatefulWidget {
@@ -32,7 +33,7 @@ class _SignupDetailState extends State<SignupDetail> {
       return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          title: Text(
+          title: const Text(
             'Sign Up',
             style: TextStyle(
               color: Colors.black,
@@ -58,25 +59,25 @@ class _SignupDetailState extends State<SignupDetail> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(height: height * 0.05),
-                Image(
+                SizedBox(height: height * 0.08),
+                const Image(
                   image: AssetImage('lib/aset/images/Luskins.png'),
                   width: 200.0,
                   height: 100.0,
                 ),
-                SizedBox(height: height * .05),
-                SizedBox(height: height * .02),
+                SizedBox(height: height * 0.08),
                 Container(
                   width: width * .9,
                   decoration: BoxDecoration(
                       color: const Color.fromARGB(44, 187, 185, 185),
                       borderRadius: BorderRadius.circular(10)),
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                     child: TextField(
                       controller: _emailController,
-                      style: TextStyle(color: Colors.black, fontSize: 18),
-                      decoration: InputDecoration(
+                      style: const TextStyle(color: Colors.black, fontSize: 18),
+                      decoration: const InputDecoration(
                         enabledBorder: InputBorder.none,
                         focusedBorder: InputBorder.none,
                         hintText: "Email",
@@ -151,6 +152,73 @@ class _SignupDetailState extends State<SignupDetail> {
                         : Text('Register'),
                   );
                 }),
+                SizedBox(height: height * .03),
+                Text(
+                  "or sign up with",
+                  style: TextStyle(color: Colors.grey),
+                ),
+                SizedBox(height: height * .02),
+                Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          // Aksi ketika gambar pertama diklik
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Image.network(
+                            "https://lh3.googleusercontent.com/0cDOOJjp8pUGDDFLqHFITEi35uMGZ5wHpZ9KTKridxk71kpR9MfeydpQqG5n8Mvetvkg5iVuZGeL2xMvxgBY_UL-T9p0x_Eo4EAh",
+                            width: 50, // Atur lebar gambar
+                            height: 50, // Atur tinggi gambar
+                          ),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          // Aksi ketika gambar kedua diklik
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Image.asset(
+                            "lib/aset/logo/fb.png",
+                            width: 55, // Atur lebar gambar
+                            height: 55, // Atur tinggi gambar
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                        height:
+                            height * 0.07), // Tambahkan jarak dari tombol Login
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "You already have account?",
+                          style: TextStyle(color: Colors.black),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Get.toNamed(Routes.LOGINDETAIL);
+                          },
+                          child: Text(
+                            "Log In",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.blue),
+                          ),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
