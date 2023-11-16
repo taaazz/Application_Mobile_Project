@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:project/app/modules/splash/bindings/splash_binding.dart';
+import 'package:project/app/utils/widgets/notification_handler.dart';
 import 'package:project/firebase_options.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -15,6 +16,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await Get.putAsync(() async => await SharedPreferences.getInstance());
+  await FirebaseMessagingHandler().initPushNotification();
 
   runApp(
     MyApp(),
