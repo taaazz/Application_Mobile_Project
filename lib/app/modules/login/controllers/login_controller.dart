@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 
 class LoginController extends GetxController {
   //TODO: Implement LoginController
@@ -21,11 +20,11 @@ class LoginController extends GetxController {
     super.onClose();
   }
 
-  Future getImage() async {
-    final ImagePicker picker = ImagePicker();
-    final XFile? imageX = await picker.pickImage(source: ImageSource.gallery);
-    if (imageX == null) return;
-    image = File(imageX.path);
-    update();
-  }
+  // Future getImage() async {
+  //   final ImagePicker picker = ImagePicker();
+  //   final XFile? imageX = await picker.pickImage(source: ImageSource.gallery);
+  //   if (imageX == null) return;
+  //   image = File(imageX.path);
+  //   update();
+  // }
 }
