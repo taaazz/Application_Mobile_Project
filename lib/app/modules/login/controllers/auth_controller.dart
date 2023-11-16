@@ -1,12 +1,25 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project/app/modules/login/views/login_detail_view.dart';
 import 'package:project/app/modules/login/views/signup_detail_view.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthController extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final SharedPreferences _prefs = Get.find<SharedPreferences>();
+
   RxBool isLoading = false.obs;
+  RxBool isLoggedIn = false.obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+    checkLoginStatus(); // Cek status login saat controller diinisialisasi
+  }
+
+  Future<void> checkLoginStatus() async {
+    isLoggedIn.value = _prefs.containsKey('user_token');
+  }
 
   Future<void> registerUser(String email, String password) async {
     try {
@@ -35,8 +48,12 @@ class AuthController extends GetxController {
         email: email,
         password: password,
       );
+      _prefs.setString(
+          'user_token', _auth.currentUser!.uid); // Simpan token autentikasi
       Get.snackbar('Success', 'Login successful',
           backgroundColor: Colors.green);
+      isLoggedIn.value = true; // Set status login menjadi true
+      Get.offAllNamed('/home');
     } catch (error) {
       Get.snackbar('Error', 'Login failed: $error',
           backgroundColor: Colors.red);
@@ -46,7 +63,9 @@ class AuthController extends GetxController {
   }
 
   void logout() async {
-    await _auth.signOut();
-    Get.offAll(LoginDetail());
+    _prefs.remove('user_token'); // Hapus token autentikasi dari penyimpanan
+    isLoggedIn.value = false; // Set status login menjadi false
+    _auth.signOut();
+    Get.offAllNamed('/login_detail');
   }
 }

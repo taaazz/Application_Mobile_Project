@@ -8,6 +8,8 @@ environment:
 dependencies:
   firebase_core: ^2.15.1
   firebase_auth: ^4.7.3
+  shared_preferences: ^2.2.0
+
   cupertino_icons: ^1.0.2
   image_picker: ^0.8.4+2
   image: ^3.0.1
