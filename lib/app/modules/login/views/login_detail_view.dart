@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project/app/modules/login/controllers/login_controller.dart';
 import 'package:project/app/routes/app_pages.dart';
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7e7e2129f6af4ab8738f339bf757e55bc41fe82a
 import '../controllers/auth_controller.dart';
 
 class LoginDetail extends StatefulWidget {
