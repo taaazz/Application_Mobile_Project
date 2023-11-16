@@ -168,10 +168,10 @@ class _SignupDetailState extends State<SignupDetail> {
                         },
                         child: Padding(
                           padding: EdgeInsets.all(8.0),
-                          child: Image.network(
-                            "https://lh3.googleusercontent.com/0cDOOJjp8pUGDDFLqHFITEi35uMGZ5wHpZ9KTKridxk71kpR9MfeydpQqG5n8Mvetvkg5iVuZGeL2xMvxgBY_UL-T9p0x_Eo4EAh",
-                            width: 50, // Atur lebar gambar
-                            height: 50, // Atur tinggi gambar
+                          child: Image.asset(
+                            "lib/aset/logo/g.png",
+                            width: 30, // Atur lebar gambar
+                            height: 30, // Atur tinggi gambar
                           ),
                         ),
                       ),
@@ -183,8 +183,8 @@ class _SignupDetailState extends State<SignupDetail> {
                           padding: EdgeInsets.all(8.0),
                           child: Image.asset(
                             "lib/aset/logo/fb.png",
-                            width: 55, // Atur lebar gambar
-                            height: 55, // Atur tinggi gambar
+                            width: 40, // Atur lebar gambar
+                            height: 40, // Atur tinggi gambar
                           ),
                         ),
                       ),

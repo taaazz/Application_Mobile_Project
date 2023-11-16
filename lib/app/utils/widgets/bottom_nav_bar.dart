@@ -15,8 +15,8 @@ class BottomNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
-      selectedItemColor: Colors.brown.shade900,
-      unselectedItemColor: Colors.grey,
+      selectedItemColor: Colors.black,
+      unselectedItemColor: const Color.fromARGB(255, 223, 223, 223),
       backgroundColor: Colors.white,
       elevation: 0,
       currentIndex: index,
@@ -40,17 +40,17 @@ class BottomNavBar extends StatelessWidget {
         BottomNavigationBarItem(
           icon: const Icon(CupertinoIcons.chat_bubble_text_fill),
           activeIcon: const Icon(CupertinoIcons.chat_bubble_text_fill,
-              color: Colors.brown),
+              color: Colors.pink),
           label: 'Review',
         ),
         BottomNavigationBarItem(
           icon: const Icon(Icons.favorite),
-          activeIcon: const Icon(Icons.favorite, color: Colors.brown),
+          activeIcon: const Icon(Icons.favorite, color: Colors.black),
           label: 'Trend',
         ),
         BottomNavigationBarItem(
           icon: const Icon(Icons.person),
-          activeIcon: const Icon(Icons.person, color: Colors.brown),
+          activeIcon: const Icon(Icons.person, color: Colors.black),
           label: 'Profile',
         ),
       ],
