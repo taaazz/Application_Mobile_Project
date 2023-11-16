@@ -94,7 +94,7 @@ class _SignupDetailState extends State<SignupDetail> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                    padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
                     child: TextFormField(
                       // Ganti dengan TextFormField
                       controller: _passwordController,
