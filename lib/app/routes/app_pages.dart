@@ -1,12 +1,10 @@
 import 'package:get/get.dart';
-import 'package:project/app/modules/home/views/webview_page.dart';
 
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/home/views/webview_page.dart';
 import '../modules/image_picker/bindings/image_picker_binding.dart';
 import '../modules/image_picker/views/image_picker_view.dart';
-// import '../modules/latihan/bindings/latihan_binding.dart';
-// import '../modules/latihan/views/latihan_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_detail_view.dart';
 import '../modules/login/views/login_view.dart';
@@ -15,10 +13,14 @@ import '../modules/product/bindings/product_binding.dart';
 import '../modules/product/views/product_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
+
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
 import '../modules/trend/bindings/trend_binding.dart';
 import '../modules/trend/views/trend_view.dart';
+
+// import '../modules/latihan/bindings/latihan_binding.dart';
+// import '../modules/latihan/views/latihan_view.dart';
 
 part 'app_routes.dart';
 
