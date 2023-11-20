@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:project/app/modules/login/controllers/login_controller.dart';
 import '../../../routes/app_pages.dart';
 import '../controllers/auth_controller.dart';
@@ -16,6 +18,32 @@ class _SignupDetailState extends State<SignupDetail> {
   final AuthController _authController = Get.put(AuthController());
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final GoogleSignIn _googleSignIn =
+      GoogleSignIn(scopes: ['email']); // Initialize GoogleSignIn
+
+  Future<void> _handleGoogleSignIn() async {
+    try {
+      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+      if (googleUser != null) {
+        final GoogleSignInAuthentication googleAuth =
+            await googleUser.authentication;
+        final AuthCredential credential = GoogleAuthProvider.credential(
+          accessToken: googleAuth.accessToken,
+          idToken: googleAuth.idToken,
+        );
+        final UserCredential userCredential =
+            await FirebaseAuth.instance.signInWithCredential(credential);
+        print('Login Berhasil: ${userCredential.user?.displayName}');
+        // Setelah login berhasil, lakukan tindakan yang sesuai
+      } else {
+        print('Login Dibatalkan');
+        // Handle jika user membatalkan login
+      }
+    } catch (error) {
+      print('Login Error: $error');
+      // Handle jika terjadi kesalahan saat login
+    }
+  }
 
   @override
   void dispose() {
@@ -163,15 +191,14 @@ class _SignupDetailState extends State<SignupDetail> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       GestureDetector(
-                        onTap: () {
-                          // Aksi ketika gambar pertama diklik
-                        },
+                        onTap:
+                            _handleGoogleSignIn, // Panggil fungsi Google SignIn saat gambar pertama diklik
                         child: Padding(
                           padding: EdgeInsets.all(8.0),
                           child: Image.asset(
                             "lib/aset/logo/g.png",
-                            width: 30, // Atur lebar gambar
-                            height: 30, // Atur tinggi gambar
+                            width: 30,
+                            height: 30,
                           ),
                         ),
                       ),
