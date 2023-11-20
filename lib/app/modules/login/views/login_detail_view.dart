@@ -172,7 +172,7 @@ class _LoginDetailState extends State<LoginDetail> {
                             );
 
                             // Setelah login berhasil, navigasi ke halaman beranda
-                            if (!_authController.isLoading.value) {
+                            if (_authController.isLoading.value) {
                               Get.toNamed(Routes.HOME);
                             }
                           },
