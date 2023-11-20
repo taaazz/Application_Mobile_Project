@@ -14,6 +14,7 @@ abstract class Routes {
   static const LATIHAN = _Paths.LATIHAN;
   static const PRODUCT = _Paths.PRODUCT;
   static const WEBVIEW_PAGE = _Paths.WEBVIEW_PAGE;
+  static const REVIEW = _Paths.REVIEW;
 }
 
 abstract class _Paths {
@@ -29,4 +30,5 @@ abstract class _Paths {
   static const LATIHAN = '/latihan';
   static const PRODUCT = '/product';
   static const WEBVIEW_PAGE = '/webview_page';
+  static const REVIEW = '/review';
 }

@@ -40,7 +40,7 @@ class BottomNavBar extends StatelessWidget {
         BottomNavigationBarItem(
           icon: const Icon(CupertinoIcons.chat_bubble_text_fill),
           activeIcon: const Icon(CupertinoIcons.chat_bubble_text_fill,
-              color: Colors.pink),
+              color: Colors.black),
           label: 'Review',
         ),
         BottomNavigationBarItem(

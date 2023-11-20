@@ -1,12 +1,24 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:project/app/utils/widgets/bottom_nav_bar.dart';
 import '../../login/controllers/auth_controller.dart';
 import '../controllers/profile_controller.dart';
 
 class ProfileView extends GetView<ProfileController> {
   final AuthController _authController = Get.put(AuthController());
+  final ProfileController _profileController = Get.find<ProfileController>();
+
+  Future<void> _pickImage() async {
+    final pickedFile =
+        await ImagePicker().getImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      _profileController.updateProfileImage(File(pickedFile.path));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,16 +43,45 @@ class ProfileView extends GetView<ProfileController> {
         backgroundColor: Colors.white,
         elevation: 0,
       ),
-      bottomNavigationBar: BottomNavBar(index: 3),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(20),
           child: Column(
             children: [
-              const SizedBox(height: 40),
-              CircleAvatar(
-                radius: 70,
-                backgroundImage: AssetImage('lib/aset/images/bb.jpeg'),
+              const SizedBox(height: 20),
+              Obx(
+                () => Stack(
+                  alignment: Alignment.bottomRight,
+                  children: [
+                    CircleAvatar(
+                      radius: 70,
+                      backgroundImage:
+                          _profileController.imageFile.value != null
+                              ? FileImage(_profileController.imageFile.value!)
+                              : AssetImage('lib/aset/images/bb.jpeg')
+                                  as ImageProvider,
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      right: 0,
+                      child: Container(
+                        width: 40, // Sesuaikan dengan ukuran ikon
+                        height: 40,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.black, // Background color for the icon
+                        ),
+                        child: IconButton(
+                          icon: Icon(
+                            Icons.camera_alt,
+                            color: Colors.white,
+                          ),
+                          onPressed: _pickImage,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
               const SizedBox(height: 20),
               itemProfile('Name', 'Tazkia', CupertinoIcons.person),
@@ -62,7 +103,7 @@ class ProfileView extends GetView<ProfileController> {
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(vertical: 15),
-                      backgroundColor: Colors.black,
+                      backgroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
@@ -70,7 +111,7 @@ class ProfileView extends GetView<ProfileController> {
                     child: const Text(
                       'Edit Profile',
                       style: TextStyle(
-                        color: Colors.white,
+                        color: Colors.black,
                       ),
                     ),
                   ),
@@ -106,6 +147,7 @@ class ProfileView extends GetView<ProfileController> {
           ),
         ),
       ),
+      bottomNavigationBar: BottomNavBar(index: 3),
     );
   }
 
@@ -116,10 +158,13 @@ class ProfileView extends GetView<ProfileController> {
         borderRadius: BorderRadius.circular(10),
       ),
       child: ListTile(
-        title: Text(title),
+        title: Text(
+          title,
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
         subtitle: Text(subtitle),
         leading: Icon(iconData),
-        trailing: Icon(Icons.arrow_forward, color: Colors.grey.shade400),
+        trailing: Icon(Icons.chevron_right, color: Colors.grey.shade400),
         tileColor: Colors.white,
       ),
     );
