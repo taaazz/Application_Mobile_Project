@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/client/bindings/client_binding.dart';
+import '../modules/client/views/client_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/home/views/webview_page.dart';
@@ -13,7 +15,6 @@ import '../modules/product/bindings/product_binding.dart';
 import '../modules/product/views/product_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
-
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
 import '../modules/trend/bindings/trend_binding.dart';
@@ -85,6 +86,11 @@ class AppPages {
       name: _Paths.WEBVIEW_PAGE,
       page: () => WebviewPage(),
       binding: HomeBinding(),
+    ),
+    GetPage(
+      name: _Paths.CLIENT,
+      page: () => const ClientView(),
+      binding: ClientBinding(),
     ),
   ];
 }
