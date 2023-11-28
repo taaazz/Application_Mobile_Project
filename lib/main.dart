@@ -9,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'app/modules/login/controllers/auth_controller.dart';
 import 'app/routes/app_pages.dart';
+// import 'package:appwrite/appwrite.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,6 +19,12 @@ void main() async {
   await Get.putAsync(() async => await SharedPreferences.getInstance());
   await FirebaseMessagingHandler().initPushNotification();
   await FirebaseMessagingHandler().initLocalNotification();
+
+//   Client client = Client();
+// client
+//     .setEndpoint('https://cloud.appwrite.io/v1')
+//     .setProject('65659bad478c88787a1c')
+//     .setSelfSigned(status: true); // For self signed certificates, only use for development
 
   runApp(
     MyApp(),
