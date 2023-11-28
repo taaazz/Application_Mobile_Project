@@ -22,6 +22,8 @@ class ProfileView extends GetView<ProfileController> {
 
   @override
   Widget build(BuildContext context) {
+    var _currentUser = _authController.currentUser;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -84,14 +86,16 @@ class ProfileView extends GetView<ProfileController> {
                 ),
               ),
               const SizedBox(height: 20),
-              itemProfile('Name', 'Tazkia', CupertinoIcons.person),
+              itemProfile('Name', _currentUser?.displayName ?? '',
+                  CupertinoIcons.person),
               const SizedBox(height: 10),
               itemProfile('Phone', '08107085816', CupertinoIcons.phone),
               const SizedBox(height: 10),
               itemProfile(
                   'Address', 'nana dan tazkia di umm', CupertinoIcons.location),
               const SizedBox(height: 10),
-              itemProfile('Email', 'jeno@gmail.com', CupertinoIcons.mail),
+              itemProfile(
+                  'Email', _currentUser?.email ?? '', CupertinoIcons.mail),
               const SizedBox(
                 height: 20,
               ),
