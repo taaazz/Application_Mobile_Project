@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:project/app/modules/home/views/home_view.dart';
+import 'package:project/app/modules/login/views/login_view.dart';
 import 'package:project/app/modules/login/views/signup_detail_view.dart';
 import 'package:project/app/modules/login/controllers/accountController.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -48,7 +50,7 @@ class AuthController extends ClientController {
       print("AccountController:: createAccount $result");
       Get.snackbar('Success', 'Registration successful',
           backgroundColor: Colors.green);
-      Get.off(SignupDetail());
+      Get.off(LoginView());
     } catch (error) {
       Get.snackbar('Error', 'Registration failed: $error',
           backgroundColor: Colors.red);
