@@ -15,6 +15,9 @@ class AuthController extends ClientController {
   final GoogleSignIn googleSignIn = GoogleSignIn();
   final AccountController accountController = Get.put(AccountController());
 
+  // final AuthController accountController =
+  //     Get.put(AccountController() as AuthController);
+
   RxBool isLoading = false.obs;
   RxBool isLoggedIn = false.obs;
   Rx<User?> _currentUser = Rx<User?>(null);

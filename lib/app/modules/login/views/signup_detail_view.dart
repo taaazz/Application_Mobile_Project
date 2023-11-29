@@ -17,10 +17,7 @@ class SignupDetail extends StatefulWidget {
 class _SignupDetailState extends State<SignupDetail> {
   bool isObsecure = true;
 
-  final AuthController accountController =
-      Get.put(AccountController() as AuthController);
-
-  // final AuthController _authController = Get.put(AuthController());
+  final AuthController _authController = Get.put(AuthController());
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _namaController = TextEditingController();
@@ -184,10 +181,10 @@ class _SignupDetailState extends State<SignupDetail> {
                 SizedBox(height: height * .02),
                 Obx(() {
                   return ElevatedButton(
-                    onPressed: accountController.isLoading.value
+                    onPressed: _authController.isLoading.value
                         ? null
                         : () {
-                            accountController.registerUserAppwrite(
+                            _authController.registerUserAppwrite(
                               _emailController.text,
                               _passwordController.text,
                               _namaController.text,
@@ -205,7 +202,7 @@ class _SignupDetailState extends State<SignupDetail> {
                         Size(width * 0.7, 50),
                       ),
                     ),
-                    child: accountController.isLoading.value
+                    child: _authController.isLoading.value
                         ? CircularProgressIndicator()
                         : Text('Register'),
                   );
