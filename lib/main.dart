@@ -43,8 +43,9 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: "Application",
       debugShowCheckedModeBanner: false,
-      initialRoute:
-          _authController.isLoggedIn.value ? '/home' : '/login_detail',
+      initialRoute: _authController.isLoggedIn.value
+          ? Routes.HOME // Jika pengguna telah login, buka halaman HOME
+          : Routes.LOGIN,
       getPages: AppPages.routes,
       initialBinding: SplashBinding(),
     );

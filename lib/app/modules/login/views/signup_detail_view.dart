@@ -236,7 +236,7 @@ class _SignupDetailState extends State<SignupDetail> {
                             Get.toNamed(Routes.LOGINDETAIL);
                           },
                           child: Text(
-                            "Log In",
+                            "Sign In",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.blue),
