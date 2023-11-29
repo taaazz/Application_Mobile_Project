@@ -7,7 +7,7 @@ import 'package:project/app/utils/widgets/notification_handler.dart';
 import 'package:project/firebase_options.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'app/modules/login/controllers/firebase_controller.dart';
+import 'app/modules/login/controllers/Auth_controller.dart';
 import 'app/routes/app_pages.dart';
 // import 'package:appwrite/appwrite.dart';
 

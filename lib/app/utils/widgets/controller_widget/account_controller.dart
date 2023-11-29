@@ -1,38 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:appwrite/appwrite.dart';
+import 'package:project/app/utils/widgets/controller_widget/client_controller.dart';
 
-class LoginController extends GetxController {
+class LoginController extends ClientController {
   late Account account;
-  late Client client;
 
   @override
   void onInit() {
     super.onInit();
-    initializeAppwrite();
   }
 
-  void initializeAppwrite() {
-    client = Client();
-    client
-        .setEndpoint(
-            'YOUR_APPWRITE_ENDPOINT') // Ganti dengan endpoint Appwrite Anda
-        .setProject(
-            'YOUR_APPWRITE_PROJECT_ID') // Ganti dengan ID proyek Appwrite Anda
-        .setSelfSigned(); // Atau setSelfSigned(status: true) jika menggunakan SSL self-signed
-
-    account = Account(client);
-  }
-
-  Future<void> createAccount(Map<String, dynamic> map) async {
+  Future<void> createAccount(String email, String password, String name) async {
     try {
       final result = await account.create(
-        email: map['email'],
-        password: map['password'],
-        name: map['name'],
-        userId: '',
+        email: email,
+        password: password,
+        name: name, // Gunakan nilai nama yang diterima dari formulir
+        userId: '', // Sesuaikan dengan kebutuhan Anda
       );
       print("AccountController:: createAccount $result");
+      // Tindakan setelah akun berhasil dibuat
     } catch (error) {
       showAlertDialog("Error Account", "$error");
     }

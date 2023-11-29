@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:project/app/utils/widgets/controller_widget/account_controller.dart';
 import '../../../routes/app_pages.dart';
-import '../controllers/firebase_controller.dart';
+import '../controllers/accountController.dart';
+import '../controllers/Auth_controller.dart';
 
 class SignupDetail extends StatefulWidget {
   const SignupDetail({Key? key}) : super(key: key);
@@ -15,6 +16,10 @@ class SignupDetail extends StatefulWidget {
 
 class _SignupDetailState extends State<SignupDetail> {
   bool isObsecure = true;
+
+  final AuthController accountController =
+      Get.put(AccountController() as AuthController);
+
   final AuthController _authController = Get.put(AuthController());
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -158,10 +163,11 @@ class _SignupDetailState extends State<SignupDetail> {
                     onPressed: _authController.isLoading.value
                         ? null
                         : () {
-                            _authController.registerUser(
-                              _emailController.text,
-                              _passwordController.text,
-                            );
+                            // _authController.registerUser(
+                            //   _emailController.text,
+                            //   _passwordController.text,
+
+                            // );
                           },
                     style: ElevatedButton.styleFrom(
                       primary: Colors.black, // Warna coklat

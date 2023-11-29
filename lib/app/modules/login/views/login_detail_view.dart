@@ -1,9 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:project/app/modules/home/views/home_view.dart';
+import 'package:project/app/modules/login/views/sign_in.dart';
 import 'package:project/app/utils/widgets/controller_widget/account_controller.dart';
 import 'package:project/app/routes/app_pages.dart';
-import '../controllers/firebase_controller.dart';
+import '../controllers/Auth_controller.dart';
 
 class LoginDetail extends StatefulWidget {
   const LoginDetail({Key? key}) : super(key: key);
