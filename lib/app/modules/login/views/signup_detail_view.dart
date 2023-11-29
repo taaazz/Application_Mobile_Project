@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:project/app/utils/widgets/controller_widget/account_controller.dart';
+import 'package:project/app/modules/login/controllers/login_controller.dart';
 import '../../../routes/app_pages.dart';
 import '../controllers/accountController.dart';
 import '../controllers/Auth_controller.dart';
@@ -20,9 +20,11 @@ class _SignupDetailState extends State<SignupDetail> {
   final AuthController accountController =
       Get.put(AccountController() as AuthController);
 
-  final AuthController _authController = Get.put(AuthController());
+  // final AuthController _authController = Get.put(AuthController());
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _namaController = TextEditingController();
+
   final GoogleSignIn _googleSignIn =
       GoogleSignIn(scopes: ['email']); // Initialize GoogleSignIn
 
@@ -54,6 +56,7 @@ class _SignupDetailState extends State<SignupDetail> {
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
+    _namaController.dispose();
     super.dispose();
   }
 
@@ -158,19 +161,40 @@ class _SignupDetailState extends State<SignupDetail> {
                   ),
                 ),
                 SizedBox(height: height * .02),
+                Container(
+                  width: width * .9,
+                  decoration: BoxDecoration(
+                      color: const Color.fromARGB(44, 187, 185, 185),
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                    child: TextField(
+                      controller: _namaController,
+                      style: const TextStyle(color: Colors.black, fontSize: 18),
+                      decoration: const InputDecoration(
+                        enabledBorder: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                        hintText: "Nama",
+                        hintStyle: TextStyle(color: Colors.grey, fontSize: 16),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: height * .02),
                 Obx(() {
                   return ElevatedButton(
-                    onPressed: _authController.isLoading.value
+                    onPressed: accountController.isLoading.value
                         ? null
                         : () {
-                            // _authController.registerUser(
-                            //   _emailController.text,
-                            //   _passwordController.text,
-
-                            // );
+                            accountController.registerUserAppwrite(
+                              _emailController.text,
+                              _passwordController.text,
+                              _namaController.text,
+                            );
                           },
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.black, // Warna coklat
+                      primary: Colors.black, // Warna coklat\\\\
                     ).copyWith(
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
@@ -181,7 +205,7 @@ class _SignupDetailState extends State<SignupDetail> {
                         Size(width * 0.7, 50),
                       ),
                     ),
-                    child: _authController.isLoading.value
+                    child: accountController.isLoading.value
                         ? CircularProgressIndicator()
                         : Text('Register'),
                   );

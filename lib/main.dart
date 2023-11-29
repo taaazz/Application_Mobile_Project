@@ -20,12 +20,6 @@ void main() async {
   await FirebaseMessagingHandler().initPushNotification();
   await FirebaseMessagingHandler().initLocalNotification();
 
-//   Client client = Client();
-// client
-//     .setEndpoint('https://cloud.appwrite.io/v1')
-//     .setProject('65659bad478c88787a1c')
-//     .setSelfSigned(status: true); // For self signed certificates, only use for development
-
   runApp(
     MyApp(),
   );

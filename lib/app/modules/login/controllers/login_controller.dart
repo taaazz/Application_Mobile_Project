@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:appwrite/appwrite.dart';
-import 'package:project/app/utils/widgets/controller_widget/client_controller.dart';
+import 'package:project/app/utils/controller_widget/client_controller.dart';
 
 class LoginController extends ClientController {
   late Account account;

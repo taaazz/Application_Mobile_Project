@@ -7,7 +7,9 @@ import 'package:project/app/modules/login/views/signup_detail_view.dart';
 import 'package:project/app/modules/login/controllers/accountController.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class AuthController extends GetxController {
+import '../../../utils/controller_widget/client_controller.dart';
+
+class AuthController extends ClientController {
   final SharedPreferences _prefs = Get.find<SharedPreferences>();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn googleSignIn = GoogleSignIn();
@@ -29,7 +31,8 @@ class AuthController extends GetxController {
     checkLoginStatus(); // Cek status login saat controller diinisialisasi
   }
 
-  Future<void> registerUser(String email, String password, String name) async {
+  Future<void> registerUserAppwrite(
+      String email, String password, String name) async {
     try {
       isLoading.value = true;
       final result = await accountController.createAccount({
@@ -56,25 +59,25 @@ class AuthController extends GetxController {
     isLoggedIn.value = userToken != null && userToken.isNotEmpty;
   }
 
-  // Future<void> registerUser(String email, String password) async {
-  //   try {
-  //     isLoading.value = true;
-  //     await _auth.createUserWithEmailAndPassword(
-  //       email: email,
-  //       password: password,
-  //     );
+  Future<void> registerUser(String email, String password) async {
+    try {
+      isLoading.value = true;
+      await _auth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
 
-  //     Get.snackbar('Success', 'Registration successful',
-  //         backgroundColor: Colors.green);
+      Get.snackbar('Success', 'Registration successful',
+          backgroundColor: Colors.green);
 
-  //     Get.off(const SignupDetail()); //Navigate ke Login Page
-  //   } catch (error) {
-  //     Get.snackbar('Error', 'Registration failed: $error',
-  //         backgroundColor: Colors.red);
-  //   } finally {
-  //     isLoading.value = false;
-  //   }
-  // }
+      Get.off(const SignupDetail()); //Navigate ke Login Page
+    } catch (error) {
+      Get.snackbar('Error', 'Registration failed: $error',
+          backgroundColor: Colors.red);
+    } finally {
+      isLoading.value = false;
+    }
+  }
 
   Future<void> loginUser(String email, String password) async {
     try {

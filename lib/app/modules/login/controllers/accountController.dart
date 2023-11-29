@@ -2,7 +2,7 @@ import 'package:appwrite/appwrite.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
-import '../../../utils/widgets/controller_widget/client_controller.dart';
+import '../../../utils/controller_widget/client_controller.dart';
 
 class AccountController extends ClientController {
   Account? account;
