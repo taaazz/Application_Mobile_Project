@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:project/app/utils/widgets/bottom_nav_bar.dart';
-import '../../login/controllers/auth_controller.dart';
+import '../../login/controllers/firebase_controller.dart';
 import '../controllers/profile_controller.dart';
 
 class ProfileView extends GetView<ProfileController> {

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project/app/routes/app_pages.dart';
 
-import '../controllers/login_controller.dart';
+import '../../../utils/widgets/controller_widget/account_controller.dart';
 import '../../../utils/widgets/login_button_widget.dart';
 
 class LoginView extends StatelessWidget {

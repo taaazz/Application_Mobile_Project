@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project/app/modules/login/controllers/login_controller.dart';
+import 'package:project/app/utils/widgets/controller_widget/account_controller.dart';
 import 'package:project/app/routes/app_pages.dart';
-import '../controllers/auth_controller.dart';
+import '../controllers/firebase_controller.dart';
 
 class LoginDetail extends StatefulWidget {
   const LoginDetail({Key? key}) : super(key: key);
