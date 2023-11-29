@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:project/app/modules/login/controllers/login_controller.dart';
 import '../../../routes/app_pages.dart';
-import '../controllers/accountController.dart';
 import '../controllers/Auth_controller.dart';
 
 class SignupDetail extends StatefulWidget {
@@ -18,9 +17,10 @@ class _SignupDetailState extends State<SignupDetail> {
   bool isObsecure = true;
 
   final AuthController _authController = Get.put(AuthController());
+
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _namaController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
 
   final GoogleSignIn _googleSignIn =
       GoogleSignIn(scopes: ['email']); // Initialize GoogleSignIn
@@ -53,7 +53,7 @@ class _SignupDetailState extends State<SignupDetail> {
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
-    _namaController.dispose();
+    _nameController.dispose();
     super.dispose();
   }
 
@@ -99,6 +99,27 @@ class _SignupDetailState extends State<SignupDetail> {
                   height: 100.0,
                 ),
                 SizedBox(height: height * 0.08),
+                Container(
+                  width: width * .9,
+                  decoration: BoxDecoration(
+                      color: const Color.fromARGB(44, 187, 185, 185),
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                    child: TextField(
+                      controller: _nameController,
+                      style: const TextStyle(color: Colors.black, fontSize: 18),
+                      decoration: const InputDecoration(
+                        enabledBorder: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                        hintText: "Username",
+                        hintStyle: TextStyle(color: Colors.grey, fontSize: 16),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: height * .02),
                 Container(
                   width: width * .9,
                   decoration: BoxDecoration(
@@ -158,27 +179,6 @@ class _SignupDetailState extends State<SignupDetail> {
                   ),
                 ),
                 SizedBox(height: height * .02),
-                Container(
-                  width: width * .9,
-                  decoration: BoxDecoration(
-                      color: const Color.fromARGB(44, 187, 185, 185),
-                      borderRadius: BorderRadius.circular(10)),
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-                    child: TextField(
-                      controller: _namaController,
-                      style: const TextStyle(color: Colors.black, fontSize: 18),
-                      decoration: const InputDecoration(
-                        enabledBorder: InputBorder.none,
-                        focusedBorder: InputBorder.none,
-                        hintText: "Nama",
-                        hintStyle: TextStyle(color: Colors.grey, fontSize: 16),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(height: height * .02),
                 Obx(() {
                   return ElevatedButton(
                     onPressed: _authController.isLoading.value
@@ -187,7 +187,7 @@ class _SignupDetailState extends State<SignupDetail> {
                             _authController.registerUserAppwrite(
                               _emailController.text,
                               _passwordController.text,
-                              _namaController.text,
+                              _nameController.text,
                             );
                           },
                     style: ElevatedButton.styleFrom(

@@ -39,10 +39,10 @@ class AuthController extends ClientController {
     try {
       isLoading.value = true;
       final result = await accountController.createAccount({
-        ID.unique(): 'userId',
-        email: 'email',
-        password: 'password',
-        name: 'name',
+        'userId': ID.unique(), // Gunakan nilai dari ID.unique()
+        'email': email, // Gunakan nilai dari parameter email
+        'password': password, // Gunakan nilai dari parameter password
+        'name': name, // Gunakan nilai dari parameter name
       });
       print(result);
       print("AccountController:: createAccount $result");
