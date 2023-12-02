@@ -1,7 +1,7 @@
 import 'package:appwrite/appwrite.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
+// import 'package:get/get_core/src/get_main.dart';
 import 'package:project/app/utils/controller_widget/client_controller.dart';
 
 class DatabaseController extends ClientController {
@@ -18,12 +18,12 @@ class DatabaseController extends ClientController {
       final result = await databases!.createDocument(
         databaseId: "6567509d3961f03c48dc",
         documentId: ID.unique(),
-        collectionId: "6567511cd5087b6dfa36",
+        collectionId: "656760763d5de370996e",
         data: map,
         permissions: [
-          Permission.read(Role.user("656756e7c1665bb782db")),
-          Permission.update(Role.user("656756e7c1665bb782db")),
-          Permission.delete(Role.user("656756e7c1665bb782db")),
+          Permission.read(Role.user("65675f93b126c4417b07")),
+          Permission.update(Role.user("65675f93b126c4417b07")),
+          Permission.delete(Role.user("65675f93b126c4417b07")),
         ],
       );
       print("DatabaseController:: storeUserName $databases");
