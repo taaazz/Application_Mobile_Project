@@ -42,6 +42,24 @@ class DatabaseController extends ClientController {
     }
   }
 
+  Future<List<Map<String, dynamic>>> getReviewData() async {
+    try {
+      final response = await databases!.listDocuments(
+        databaseId: '6567509d3961f03c48dc',
+        collectionId: '656760763d5de370996e',
+      );
+
+      List<Map<String, dynamic>> reviews = [];
+      response.documents.forEach((document) {
+        reviews.add(document.data);
+      });
+
+      return reviews;
+    } catch (error) {
+      throw Exception('Error fetching review data: $error');
+    }
+  }
+
   Future<void> updateReview(
       String documentId, Map<String, dynamic> reviewData) async {
     try {
@@ -49,7 +67,7 @@ class DatabaseController extends ClientController {
         databaseId: "6567509d3961f03c48dc",
         documentId: documentId,
         data: reviewData,
-        collectionId: '',
+        collectionId: '656760763d5de370996e',
       );
       print("DatabaseController:: updateReview $result");
     } catch (error) {
@@ -72,7 +90,7 @@ class DatabaseController extends ClientController {
       final result = await databases!.deleteDocument(
         databaseId: "6567509d3961f03c48dc",
         documentId: documentId,
-        collectionId: '',
+        collectionId: '656760763d5de370996e',
       );
       print("DatabaseController:: deleteReview $result");
     } catch (error) {
