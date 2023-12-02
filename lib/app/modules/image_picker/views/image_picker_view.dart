@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:project/app/utils/controller_widget/database_controller.dart';
 import 'package:project/app/utils/widgets/bottom_nav_bar.dart';
 
 class ProductReview {
@@ -28,6 +29,16 @@ class ProductReviewScreen extends StatefulWidget {
 
 class _ProductReviewScreenState extends State<ProductReviewScreen> {
   List<ProductReview> _productReviews = [];
+  late DatabaseController _databaseController;
+
+  @override
+  void initState() {
+    super.initState();
+    _databaseController =
+        Get.find<DatabaseController>(); // Inisialisasi DatabaseController
+  }
+
+  final DatabaseController databaseController = Get.put(DatabaseController());
 
   Future<void> _addReview() async {
     final picker = ImagePicker();
@@ -56,6 +67,13 @@ class _ProductReviewScreenState extends State<ProductReviewScreen> {
                       // Prompt user for review details
                       final review = await _getReviewDetails(pickedFile!.path);
                       if (review != null) {
+                        await _databaseController.storeUserName({
+                          'name': review.name,
+                          'price': review.price,
+                          'imageUrl': review.imageUrl,
+                          'rating': review.rating,
+                          'description': review.description,
+                        });
                         setState(() {
                           _productReviews.add(review);
                         });
@@ -147,6 +165,7 @@ class _ProductReviewScreenState extends State<ProductReviewScreen> {
                       );
                       return;
                     }
+
                     Navigator.of(context).pop(
                       ProductReview(
                         name: name,

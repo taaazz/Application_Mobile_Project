@@ -1,12 +1,7 @@
 import 'package:appwrite/appwrite.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-<<<<<<< HEAD
 import 'package:project/app/utils/controller_widget/client_controller.dart';
-=======
-
-import 'client_controller.dart';
->>>>>>> 33dfb321425613a61af7c78c9955f281dee48af6
 
 class StorageController extends ClientController {
   Storage? storage;
@@ -20,11 +15,7 @@ class StorageController extends ClientController {
   Future storeImage(String imgPath, String imgName) async {
     try {
       final result = await storage!.createFile(
-<<<<<<< HEAD
         bucketId: '6566c841487a3f65533c',
-=======
-        bucketId: '656ae869d99bfcc5afd1',
->>>>>>> 33dfb321425613a61af7c78c9955f281dee48af6
         fileId: ID.unique(),
         file: InputFile.fromPath(
           path: imgPath,
