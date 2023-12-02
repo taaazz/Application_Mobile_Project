@@ -1,9 +1,9 @@
+// ignore: file_names
 import 'package:appwrite/appwrite.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:project/app/modules/home/views/home_view.dart';
 import 'package:project/app/modules/login/views/login_view.dart';
 import 'package:project/app/modules/login/views/signup_detail_view.dart';
 import 'package:project/app/modules/login/controllers/accountController.dart';
@@ -16,9 +16,6 @@ class AuthController extends ClientController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn googleSignIn = GoogleSignIn();
   final AccountController accountController = Get.put(AccountController());
-
-  // final AuthController accountController =
-  //     Get.put(AccountController() as AuthController);
 
   RxBool isLoading = false.obs;
   RxBool isLoggedIn = false.obs;
