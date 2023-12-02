@@ -15,7 +15,7 @@ class StorageController extends ClientController {
   Future storeImage(String imgPath, String imgName) async {
     try {
       final result = await storage!.createFile(
-        bucketId: '6566c841487a3f65533c',
+        bucketId: '656ae869d99bfcc5afd1',
         fileId: ID.unique(),
         file: InputFile.fromPath(
           path: imgPath,

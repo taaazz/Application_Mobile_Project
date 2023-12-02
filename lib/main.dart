@@ -9,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'app/modules/login/controllers/Auth_controller.dart';
 import 'app/routes/app_pages.dart';
+import 'app/utils/controller_widget/database_controller.dart';
 // import 'package:appwrite/appwrite.dart';
 
 void main() async {
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
   }) : super(key: key);
 
   final AuthController _authController = Get.put(AuthController());
+  final DatabaseController databaseController = Get.put(DatabaseController());
 
   @override
   Widget build(BuildContext context) {
