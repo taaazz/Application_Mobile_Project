@@ -8,9 +8,28 @@ class StorageController extends ClientController {
   @override
   void onInit() {
     super.onInit();
+
 // appwrite
     storage = Storage(client);
   }
+
+  // aku nambahin ini kan buat bisa di panggil di image picker
+
+  Future getImageUrl(String fileId) async {
+    try {
+      final file = await storage!.getFileDownload(
+        fileId: ID.unique(),
+        bucketId:
+            '656ae869d99bfcc5afd1', // Ganti dengan ID bucket yang sesuai di Appwrite
+      );
+      final imageUrl = file['\$url']; // URL gambar dari file di Appwrite
+      return imageUrl.toString(); // Pastikan imageUrl adalah String
+    } catch (error) {
+      throw Exception('Error fetching image URL: $error');
+    }
+  }
+
+//nyampe sini
 
   Future storeImage(String imgPath, String imgName) async {
     try {

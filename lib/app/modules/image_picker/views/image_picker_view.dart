@@ -133,10 +133,37 @@ class _ProductReviewScreenState extends State<ProductReviewScreen> {
                       'rating': rating,
                     };
 
-                    await _storageController.storeImage(
-                      imagePath,
-                      'product_review_image.jpg',
-                    );
+                    //aku tambahin baru di sini
+
+                    // Fungsi untuk mengupdate review dengan gambar
+                    void updateReviewWithImage(
+                        String imagePath, Map<String, dynamic> review) async {
+                      try {
+                        // Simpan gambar ke storage Appwrite
+                        await _storageController.storeImage(
+                          imagePath,
+                          'product_review_image.jpg', // Ganti dengan nama file yang sesuai
+                        );
+
+                        // Dapatkan URL gambar dari Appwrite setelah disimpan
+                        // harusnya yg ngaruh di sini
+                        String imageUrl = await _storageController
+                            .getImageUrl('656ae869d99bfcc5afd1');
+
+                        // Update data review dengan URL gambar baru
+                        review['imagePath'] = imageUrl;
+
+                        // Panggil fungsi untuk update review
+                        _databaseController.updateReview(
+                            review['\$id'], review);
+                      } catch (error) {
+                        // Tangani kesalahan jika terjadi
+                        print("Error updating review with image: $error");
+                      }
+                    }
+
+                    // nyampe sini
+
                     await _databaseController.storeReview(reviewData);
 
                     Navigator.of(context).pop(); // Close dialog
@@ -368,7 +395,7 @@ class _ProductReviewScreenState extends State<ProductReviewScreen> {
                                       10.0)), // Menyesuaikan radius gambar
                               child: Image.network(
                                 review[
-                                    'product_review_image.jpg'], // Gunakan URL gambar dari data review
+                                    'https://cloud.appwrite.io/console/project-65659bad478c88787a1c/storage/bucket-656ae869d99bfcc5afd1/file-656c9afb4f6a686587a6'], // Gunakan URL gambar dari data review
                                 height: 150.0,
                                 width: double.infinity,
                                 fit: BoxFit.cover,
