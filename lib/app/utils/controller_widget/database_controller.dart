@@ -60,14 +60,15 @@ class DatabaseController extends ClientController {
     }
   }
 
-  Future<void> updateReview(
-      String documentId, Map<String, dynamic> reviewData) async {
+  void updateReview(String documentId, Map<String, dynamic> reviewData) async {
     try {
       final result = await databases!.updateDocument(
-        databaseId: "6567509d3961f03c48dc",
+        databaseId:
+            "6567509d3961f03c48dc", // Ganti dengan ID database yang digunakan di Appwrite
         documentId: documentId,
         data: reviewData,
-        collectionId: "656760763d5de370996e",
+        collectionId:
+            "656760763d5de370996e", // Ganti dengan ID koleksi/collection yang digunakan di Appwrite
       );
       print("DatabaseController:: updateReview $result");
     } catch (error) {
