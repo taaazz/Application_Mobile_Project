@@ -17,7 +17,8 @@ class _ProductReviewScreenState extends State<ProductReviewScreen> {
   final TextEditingController _productNameController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
   final TextEditingController _priceController = TextEditingController();
-  int _rating = 0;
+  final TextEditingController _ratingController = TextEditingController();
+
   XFile? _imageFile;
 
   Future<void> _getImage(ImageSource source) async {
@@ -27,6 +28,7 @@ class _ProductReviewScreenState extends State<ProductReviewScreen> {
       setState(() {
         _imageFile = image;
       });
+      _uploadReview();
     }
   }
 
@@ -70,7 +72,7 @@ class _ProductReviewScreenState extends State<ProductReviewScreen> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('Enter Product Details'),
+            title: Text('Tulis Review Kamu'),
             content: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -98,17 +100,13 @@ class _ProductReviewScreenState extends State<ProductReviewScreen> {
                     },
                     decoration: InputDecoration(labelText: 'Price'),
                   ),
-                  Slider(
-                    value: _rating.toDouble(),
-                    min: 0,
-                    max: 5,
-                    divisions: 5,
+                  TextField(
+                    controller: _ratingController,
+                    keyboardType: TextInputType.number,
                     onChanged: (value) {
-                      setState(() {
-                        _rating = value.toInt();
-                      });
+                      // You can handle onChanged event if needed
                     },
-                    label: 'Rating: $_rating',
+                    decoration: InputDecoration(labelText: 'Rating (0-5)'),
                   ),
                 ],
               ),
@@ -125,13 +123,14 @@ class _ProductReviewScreenState extends State<ProductReviewScreen> {
                   final String productName = _productNameController.text;
                   final String description = _descriptionController.text;
                   final int price = int.tryParse(_priceController.text) ?? 0;
+                  final int rating = int.tryParse(_ratingController.text) ?? 0;
 
                   if (price >= 1 && price <= 100000) {
                     final Map<String, dynamic> reviewData = {
                       'nama_produk': productName,
                       'deskripsi': description,
                       'price': price,
-                      'rating': _rating,
+                      'rating': rating,
                     };
 
                     await _storageController.storeImage(
@@ -208,7 +207,24 @@ class _ProductReviewScreenState extends State<ProductReviewScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Product Reviews'),
+        title: Text(
+          'Review Product',
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 20,
+          ),
+        ),
+        leading: IconButton(
+          icon: const Icon(
+            Icons.chevron_left,
+            color: Colors.black,
+          ),
+          onPressed: () {
+            Get.back();
+          },
+        ),
+        backgroundColor: Colors.white,
+        elevation: 0,
       ),
       body: FutureBuilder<List<Map<String, dynamic>>>(
         future: _databaseController.getReviewData(),
@@ -230,94 +246,125 @@ class _ProductReviewScreenState extends State<ProductReviewScreen> {
                     padding: EdgeInsets.all(16.0),
                     child: FloatingActionButton.extended(
                       onPressed: _showImagePicker,
-                      label: Text('Upload Image'),
+                      label: Text(
+                        'Upload Image',
+                        style: TextStyle(
+                            color: Colors.white), // Ubah warna teks label
+                      ),
                       icon: Icon(Icons.add_a_photo),
+                      backgroundColor:
+                          Colors.black, // Ubah warna background button
                     ),
                   );
                 }
 
                 final review = reviewData[index - 1];
                 return Card(
-                  margin: EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
-                  child: ListTile(
-                    title: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        review['imagePath'] != null
-                            ? Image.network(
+                  margin: EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
+                  shape: RoundedRectangleBorder(
+                    borderRadius:
+                        BorderRadius.circular(10.0), // Menyesuaikan radius card
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      review['imagePath'] != null
+                          ? ClipRRect(
+                              borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(
+                                      10.0)), // Menyesuaikan radius gambar
+                              child: Image.network(
                                 review[
                                     'product_review_image.jpg'], // Gunakan URL gambar dari data review
-                                height: 200.0,
+                                height: 150.0,
                                 width: double.infinity,
                                 fit: BoxFit.cover,
-                              )
-                            : Container(
-                                // Tampilkan placeholder jika tidak ada URL gambar
-                                height: 200.0,
-                                decoration: BoxDecoration(
-                                  color:
-                                      const Color.fromARGB(255, 244, 240, 240),
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                child: Icon(Icons.image, size: 50.0),
-                                alignment: Alignment.center,
                               ),
-                        SizedBox(height: 8.0),
-                        Text(
-                          review['nama_produk'],
-                          style: TextStyle(
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text(
-                          review['deskripsi'],
-                          style: TextStyle(fontSize: 14.0),
-                        ),
-                        SizedBox(height: 8.0),
-                        Text(
-                          'Rp ${review['price'].toStringAsFixed(0)}',
-                          style: TextStyle(
-                              color: Colors.brown, fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(height: 8.0),
-                        Row(
+                            )
+                          : Container(
+                              // Tampilkan placeholder jika tidak ada URL gambar
+                              height: 150.0,
+                              decoration: BoxDecoration(
+                                color: Color.fromARGB(255, 243, 243, 243),
+                                borderRadius: BorderRadius.vertical(
+                                    top: Radius.circular(
+                                        10.0)), // Menyesuaikan radius gambar
+                              ),
+                              child: Icon(Icons.image, size: 50.0),
+                              alignment: Alignment.center,
+                            ),
+                      ListTile(
+                        title: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            _buildStarRating(review['rating']),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        review['nama_produk'],
+                                        style: TextStyle(
+                                          fontSize: 18.0,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      Text(
+                                        review['deskripsi'],
+                                        style: TextStyle(fontSize: 14.0),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                PopupMenuButton<String>(
+                                  icon: Icon(Icons.more_vert),
+                                  itemBuilder: (BuildContext context) {
+                                    return ['Edit', 'Delete']
+                                        .map((String choice) {
+                                      return PopupMenuItem<String>(
+                                        value: choice,
+                                        child: Text(choice),
+                                      );
+                                    }).toList();
+                                  },
+                                  onSelected: (String choice) {
+                                    if (choice == 'Edit') {
+                                      _editReview(
+                                          review); // Panggil fungsi untuk edit
+                                    } else if (choice == 'Delete') {
+                                      _deleteReview(
+                                          review); // Panggil fungsi untuk delete
+                                    }
+                                  },
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 8.0),
+                            Text(
+                              'Rp ${review['price'].toStringAsFixed(0)}',
+                              style: TextStyle(
+                                  color: Colors.brown,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(height: 8.0),
+                            Row(
+                              children: [
+                                _buildStarRating(review['rating']),
+                              ],
+                            ),
                           ],
                         ),
-                      ],
-                    ),
-                    trailing: PopupMenuButton<String>(
-                      icon: Icon(Icons.more_vert),
-                      itemBuilder: (BuildContext context) {
-                        return ['Edit', 'Delete'].map((String choice) {
-                          return PopupMenuItem<String>(
-                            value: choice,
-                            child: Text(choice),
-                          );
-                        }).toList();
-                      },
-                      onSelected: (String choice) {
-                        if (choice == 'Edit') {
-                          _editReview(review); // Panggil fungsi untuk edit
-                        } else if (choice == 'Delete') {
-                          _deleteReview(review); // Panggil fungsi untuk delete
-                        }
-                      },
-                    ),
+                      ),
+                    ],
                   ),
                 );
               },
             );
           }
         },
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _uploadReview(); // Memanggil modal untuk memilih gambar
-        },
-        child: Icon(Icons.add),
       ),
       bottomNavigationBar: BottomNavBar(index: 1),
     );
