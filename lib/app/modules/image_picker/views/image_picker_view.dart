@@ -425,7 +425,11 @@ class _ProductReviewScreenState extends State<ProductReviewScreen> {
                                   },
                                   onSelected: (String choice) {
                                     if (choice == 'Edit') {
+<<<<<<< HEAD
                                       _updateReview(
+=======
+                                      _editReview(
+>>>>>>> 52476ea25c44105b8acd66b7f06f9acfab503352
                                           review); // Panggil fungsi untuk edit
                                     } else if (choice == 'Delete') {
                                       _deleteReview(
