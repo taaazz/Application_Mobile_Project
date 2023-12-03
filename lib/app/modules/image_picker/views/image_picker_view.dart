@@ -1,10 +1,10 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:project/app/utils/controller_widget/database_controller.dart';
 import 'package:project/app/utils/controller_widget/storage_controller.dart';
+
+import '../../../utils/widgets/bottom_nav_bar.dart';
 
 class ProductReviewScreen extends StatefulWidget {
   @override
@@ -78,15 +78,24 @@ class _ProductReviewScreenState extends State<ProductReviewScreen> {
                 children: [
                   TextField(
                     controller: _productNameController,
+                    onChanged: (value) {
+                      // You can handle onChanged event if needed
+                    },
                     decoration: InputDecoration(labelText: 'Product Name'),
                   ),
                   TextField(
                     controller: _descriptionController,
+                    onChanged: (value) {
+                      // You can handle onChanged event if needed
+                    },
                     decoration: InputDecoration(labelText: 'Description'),
                   ),
                   TextField(
                     controller: _priceController,
                     keyboardType: TextInputType.number,
+                    onChanged: (value) {
+                      // You can handle onChanged event if needed
+                    },
                     decoration: InputDecoration(labelText: 'Price'),
                   ),
                   Slider(
@@ -132,7 +141,6 @@ class _ProductReviewScreenState extends State<ProductReviewScreen> {
                     await _databaseController.storeReview(reviewData);
 
                     Navigator.of(context).pop(); // Close dialog
-                    _navigateToProductReviewList(); // Navigate to review list
                   } else {
                     Get.snackbar(
                       'Error',
@@ -151,64 +159,49 @@ class _ProductReviewScreenState extends State<ProductReviewScreen> {
     }
   }
 
-  void _navigateToProductReviewList() {
-    Get.to(ProductReviewListScreen());
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Add Product Review'),
-      ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            GestureDetector(
-              onTap: () {
-                _showImagePicker();
-              },
-              child: _imageFile != null
-                  ? Image.file(
-                      File(_imageFile!.path),
-                      height: 200.0,
-                      fit: BoxFit.cover,
-                    )
-                  : Container(
-                      height: 200.0,
-                      color: Colors.grey[300],
-                      child: Icon(Icons.camera_alt, size: 50.0),
-                      alignment: Alignment.center,
-                    ),
-            ),
-            SizedBox(height: 20.0),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _uploadReview(); // Memanggil modal untuk memilih gambar
-        },
-        child: Icon(Icons.add),
-      ),
-    );
-  }
-}
-
-// ignore: must_be_immutable
-class ProductReviewListScreen extends StatelessWidget {
-  final DatabaseController _databaseController = Get.put(DatabaseController());
-
-  ProductReviewListScreen({super.key});
-
   void _editReview(Map<String, dynamic> review) {
     _databaseController.updateReview(review['documentId'], review);
   }
 
   void _deleteReview(Map<String, dynamic> review) {
-    _databaseController.deleteReview(review['documentId']);
+    String documentId = review['\$id'];
+    _databaseController.deleteReview(documentId);
+  }
+
+  Widget _buildStarRating(int rating) {
+    List<Widget> starIcons = [];
+
+    // Membuat icon full star sesuai dengan rating
+    for (int i = 0; i < rating; i++) {
+      starIcons.add(
+        Icon(
+          Icons.star,
+          color: Color.fromARGB(255, 255, 230, 3),
+        ),
+      );
+    }
+
+    // Menambahkan icon half star jika diperlukan
+    if (rating % 1 != 0) {
+      starIcons.add(
+        Icon(
+          Icons.star_half,
+          color: Color.fromARGB(255, 255, 230, 0),
+        ),
+      );
+    }
+
+    // Mengisi sisa icon dengan empty star
+    while (starIcons.length < 5) {
+      starIcons.add(
+        Icon(
+          Icons.star_border,
+          color: Color.fromARGB(255, 255, 230, 3),
+        ),
+      );
+    }
+
+    return Row(children: starIcons);
   }
 
   @override
@@ -218,7 +211,7 @@ class ProductReviewListScreen extends StatelessWidget {
         title: Text('Product Reviews'),
       ),
       body: FutureBuilder<List<Map<String, dynamic>>>(
-        future: Get.find<DatabaseController>().getReviewData(),
+        future: _databaseController.getReviewData(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
@@ -227,13 +220,23 @@ class ProductReviewListScreen extends StatelessWidget {
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
             return Center(child: Text('No reviews available'));
           } else {
-            // Jika data tersedia, tampilkan dalam ListView
             List<Map<String, dynamic>> reviewData = snapshot.data!;
             return ListView.builder(
               padding: EdgeInsets.symmetric(vertical: 10.0),
-              itemCount: reviewData.length,
+              itemCount: reviewData.length + 1, // Tambahan satu item untuk FAB
               itemBuilder: (context, index) {
-                final review = reviewData[index];
+                if (index == 0) {
+                  return Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: FloatingActionButton.extended(
+                      onPressed: _showImagePicker,
+                      label: Text('Upload Image'),
+                      icon: Icon(Icons.add_a_photo),
+                    ),
+                  );
+                }
+
+                final review = reviewData[index - 1];
                 return Card(
                   margin: EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
                   child: ListTile(
@@ -310,42 +313,13 @@ class ProductReviewListScreen extends StatelessWidget {
           }
         },
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          _uploadReview(); // Memanggil modal untuk memilih gambar
+        },
+        child: Icon(Icons.add),
+      ),
+      bottomNavigationBar: BottomNavBar(index: 1),
     );
-  }
-
-  Widget _buildStarRating(int rating) {
-    List<Widget> starIcons = [];
-
-    // Membuat icon full star sesuai dengan rating
-    for (int i = 0; i < rating; i++) {
-      starIcons.add(
-        Icon(
-          Icons.star,
-          color: Color.fromARGB(255, 255, 230, 3),
-        ),
-      );
-    }
-
-    // Menambahkan icon half star jika diperlukan
-    if (rating % 1 != 0) {
-      starIcons.add(
-        Icon(
-          Icons.star_half,
-          color: Color.fromARGB(255, 255, 230, 0),
-        ),
-      );
-    }
-
-    // Mengisi sisa icon dengan empty star
-    while (starIcons.length < 5) {
-      starIcons.add(
-        Icon(
-          Icons.star_border,
-          color: Color.fromARGB(255, 255, 230, 3),
-        ),
-      );
-    }
-
-    return Row(children: starIcons);
   }
 }
