@@ -67,7 +67,7 @@ class DatabaseController extends ClientController {
         databaseId: "6567509d3961f03c48dc",
         documentId: documentId,
         data: reviewData,
-        collectionId: '656760763d5de370996e',
+        collectionId: "656760763d5de370996e",
       );
       print("DatabaseController:: updateReview $result");
     } catch (error) {
@@ -90,7 +90,7 @@ class DatabaseController extends ClientController {
       final result = await databases!.deleteDocument(
         databaseId: "6567509d3961f03c48dc",
         documentId: documentId,
-        collectionId: '656760763d5de370996e',
+        collectionId: "656760763d5de370996e",
       );
       print("DatabaseController:: deleteReview $result");
     } catch (error) {
