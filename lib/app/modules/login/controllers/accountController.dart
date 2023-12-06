@@ -5,8 +5,6 @@ import 'package:get/get.dart';
 import '../../../utils/controller_widget/client_controller.dart';
 
 class AccountController extends ClientController {
-  Account? account;
-
   @override
   void onInit() {
     super.onInit();
@@ -16,7 +14,7 @@ class AccountController extends ClientController {
 
   Future createAccount(Map map) async {
     try {
-      final result = await account!.create(
+      final result = await account.create(
         userId: map['userId'],
         email: map['email'],
         password: map['password'],
@@ -41,7 +39,7 @@ class AccountController extends ClientController {
   // SIGN IN
   Future createEmailSession(Map map) async {
     try {
-      final result = await account!.createEmailSession(
+      final result = await account.createEmailSession(
         email: map['email'],
         password: map['password'],
       );

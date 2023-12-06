@@ -1,10 +1,10 @@
-import 'package:appwrite/appwrite.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:appwrite/appwrite.dart';
+import 'package:project/app/Models/appwrite.dart';
 import 'package:project/app/utils/controller_widget/client_controller.dart';
 
 class StorageController extends ClientController {
-  Storage? storage;
   @override
   void onInit() {
     super.onInit();
@@ -13,34 +13,38 @@ class StorageController extends ClientController {
     storage = Storage(client);
   }
 
-  // aku nambahin ini kan buat bisa di panggil di image picker
+  // Future<String> getImageUrl(String fileId) async {
+  //   try {
+  //     final result = await storage.getFilePreview(
+  //       fileId: fileId,
+  //       bucketId: APPWRITE_IMAGE_BUCKET_ID,
+  //     );
 
-  Future getImageUrl(String fileId) async {
-    try {
-      final file = await storage!.getFileDownload(
-        fileId: ID.unique(),
-        bucketId:
-            '656ae869d99bfcc5afd1', // Ganti dengan ID bucket yang sesuai di Appwrite
-      );
-      final imageUrl = file['\$url']; // URL gambar dari file di Appwrite
-      return imageUrl.toString(); // Pastikan imageUrl adalah String
-    } catch (error) {
-      throw Exception('Error fetching image URL: $error');
-    }
-  }
+  //     // Mengonversi respons ke dalam bentuk AppwriteFile
+  //     final decodedResult =
+  //         AppwriteFile.fromMap(result as Map<String, dynamic>);
 
-//nyampe sini
+  //     // URL gambar yang dihasilkan
+  //     final imageUrl =
+  //         'https://cloud.appwrite.io/v1/storage/buckets/${decodedResult.bucket}/files/${decodedResult.$id}/preview?project=65659bad478c88787a1c';
+
+  //     return imageUrl;
+  //   } catch (e) {
+  //     throw Exception('Error getting image URL: $e');
+  //   }
+  // }
 
   Future storeImage(String imgPath, String imgName) async {
     try {
-      final result = await storage!.createFile(
-        bucketId: '656ae869d99bfcc5afd1',
+      final result = await storage.createFile(
+        bucketId: APPWRITE_IMAGE_BUCKET_ID,
         fileId: ID.unique(),
         file: InputFile.fromPath(
           path: imgPath,
           filename: imgName,
         ),
       );
+
       print("StorageController:: storeImage $result");
     } catch (error) {
       Get.defaultDialog(
