@@ -1,8 +1,11 @@
 import 'package:http/http.dart' as http;
-import 'package:project/app/Models/Product.dart';
+import 'package:http/src/mock_client.dart';
+import 'package:project/app/data/Models/Product.dart';
 
 class RemoteServices {
   static var client = http.Client();
+
+  RemoteServices(MockClient mockClient);
 
   static Future<List<Product>?> fetchProducts() async {
     var response = await client.get(Uri.parse(

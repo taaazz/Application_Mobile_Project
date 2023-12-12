@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:project/app/Models/Product.dart';
-import 'package:project/app/modules/product/servis/Remote_Services.dart';
+import 'package:project/app/data/Models/Product.dart';
+import 'package:project/app/data/api/Remote_Services.dart';
 
 class ProductController extends GetxController {
   var isLoading = true.obs;

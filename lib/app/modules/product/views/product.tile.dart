@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project/app/Models/Product.dart';
+import 'package:project/app/data/Models/Product.dart';
 
 class ProductTile extends StatelessWidget {
   final Product product;

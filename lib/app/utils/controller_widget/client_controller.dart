@@ -1,6 +1,6 @@
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:appwrite/appwrite.dart';
-import 'package:project/app/Models/appwrite.dart';
+import 'package:project/app/data/api/appwrite.dart';
 // import 'package:http/http.dart';
 
 class ClientController extends GetxController {

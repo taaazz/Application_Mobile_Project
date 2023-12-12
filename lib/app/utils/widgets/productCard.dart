@@ -59,7 +59,7 @@ class ProductCard extends StatelessWidget {
                     children: [
                       Text(
                         productPrice,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.w800,
                         ),
@@ -74,7 +74,7 @@ class ProductCard extends StatelessWidget {
                             width: 0.5,
                           ),
                         ),
-                        child: Center(
+                        child: const Center(
                           child: Icon(
                             Icons.shopping_bag,
                             color: Colors.white,

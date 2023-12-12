@@ -1,7 +1,7 @@
 import 'package:appwrite/appwrite.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:project/app/Models/appwrite.dart';
+import 'package:project/app/data/api/appwrite.dart';
 // import 'package:get/get_core/src/get_main.dart';
 import 'package:project/app/utils/controller_widget/client_controller.dart';
 

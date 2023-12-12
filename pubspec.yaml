@@ -38,8 +38,12 @@ flutter_launcher_icons:
   min_sdk_android: 21
 
 dev_dependencies:
+  mockito: ^5.4.2
   flutter_lints: ^2.0.0
-  flutter_test:
+  build_runner: ^2.4.6
+  integration_test:
+    sdk: flutter
+  flutter_test: 
     sdk: flutter
 
 flutter:
