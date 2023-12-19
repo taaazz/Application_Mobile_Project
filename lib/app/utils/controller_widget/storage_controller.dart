@@ -33,31 +33,41 @@ class StorageController extends ClientController {
   //     throw Exception('Error getting image URL: $e');
   //   }
   // }
-
-  Future storeImage(String imgPath, String imgName) async {
-    try {
-      final result = await storage.createFile(
-        bucketId: APPWRITE_IMAGE_BUCKET_ID,
-        fileId: ID.unique(),
-        file: InputFile.fromPath(
+  Future storeImage(String? imgPath, String? imgName) async {
+    if (imgPath != null && imgName != null) {
+      try {
+        final inputFile = InputFile.fromPath(
           path: imgPath,
           filename: imgName,
-        ),
-      );
+        );
 
-      print("StorageController:: storeImage $result");
-    } catch (error) {
-      Get.defaultDialog(
-        title: "Error Storage",
-        titlePadding: const EdgeInsets.only(top: 15, bottom: 5),
-        titleStyle: Get.context?.theme.textTheme.titleLarge,
-        content: Text(
-          "$error",
-          style: Get.context?.theme.textTheme.bodyMedium,
-          textAlign: TextAlign.center,
-        ),
-        contentPadding: const EdgeInsets.only(top: 5, left: 15, right: 15),
-      );
+        final result = await storage.createFile(
+          bucketId: APPWRITE_IMAGE_BUCKET_ID,
+          fileId: ID.unique(),
+          file: inputFile,
+        );
+
+        print("StorageController:: storeImage $result");
+      } catch (error) {
+        Get.defaultDialog(
+          title: "Error Storage",
+          titlePadding: const EdgeInsets.only(top: 15, bottom: 5),
+          titleStyle: Get.context?.theme.textTheme.titleLarge,
+          content: Text(
+            "$error",
+            style: Get.context?.theme.textTheme.bodyMedium,
+            textAlign: TextAlign.center,
+          ),
+          contentPadding: const EdgeInsets.only(top: 5, left: 15, right: 15),
+        );
+      }
+    } else {
+      // Handle the case where imagePath or imageName is null
+      // This block can include logging, throwing an error, or other error handling
+      // For example:
+      // ignore: avoid_print
+      print('imagePath or imageName is null');
+      // throw Exception('imagePath or imageName is null');
     }
   }
 }

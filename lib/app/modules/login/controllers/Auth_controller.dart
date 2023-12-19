@@ -12,10 +12,18 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../utils/controller_widget/client_controller.dart';
 
 class AuthController extends ClientController {
-  final SharedPreferences _prefs = Get.find<SharedPreferences>();
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  final GoogleSignIn googleSignIn = GoogleSignIn();
+  late SharedPreferences _prefs = Get.find<SharedPreferences>();
+  late FirebaseAuth _auth = FirebaseAuth.instance;
+  late final GoogleSignIn googleSignIn = GoogleSignIn();
   final AccountController accountController = Get.put(AccountController());
+
+  set auth(FirebaseAuth auth) {
+    _auth = auth;
+  }
+
+  set prefs(SharedPreferences prefs) {
+    _prefs = prefs;
+  }
 
   RxBool isLoading = false.obs;
   RxBool isLoggedIn = false.obs;
